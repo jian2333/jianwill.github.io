@@ -1,3 +1,3 @@
-This is master branch
+This is hexo branch
 
 used for record source code of hexo blog.

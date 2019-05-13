@@ -80,5 +80,5 @@ theme: landscape
 deploy:
   type: git
   repo: git@github.com:jian2333/jianwill.github.io.git
-  branch: public
+  branch: master
   message:
