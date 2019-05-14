@@ -121,7 +121,7 @@
 <meta property="og:site_name" content="Hi,Jianww">
 <meta property="og:description" content="Hello Hexo关于 hexo 的一次踩坑总结。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-14T12:49:58.714Z">
+<meta property="og:updated_time" content="2019-05-14T13:42:45.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hello hexo">
 <meta name="twitter:description" content="Hello Hexo关于 hexo 的一次踩坑总结。">
@@ -232,42 +232,32 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-投喂">
-          <a href="/donate/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-cutlery"></i> <br>
-            
-            投喂
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-后宫">
-          <a href="/friends/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br>
-            
-            后宫
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-留言板">
-          <a href="/message/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
-            
-            留言板
           </a>
         </li>
       
@@ -447,6 +437,27 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -485,7 +496,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.profile</span><br></pre></td></tr></table></figure>
 <p>5.测试：安装一个全局包试试</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g jslint</span><br><span class="line"></span><br><span class="line">[luncher@localhost aaa]$ ls ~/.npm-global/bin/</span><br><span class="line">jshint</span><br><span class="line">[luncher@localhost aaa]$</span><br></pre></td></tr></table></figure>
-<h4 id="方法三-推荐"><a href="#方法三-推荐" class="headerlink" title="方法三(推荐)"></a>方法三(推荐)</h4><p>使用 <strong>nvm</strong> 。nvm 可以在一台电脑上管理不同版本的 npm，并且使用 nvm 安装 npm 后，npm 默认的安装路径是有读写权限的，也就是说，以后 npm 安装任何包都用再使用 <code>sudo</code> 参数了。</p>
+<h4 id="方法三-推荐"><a href="#方法三-推荐" class="headerlink" title="方法三(推荐)"></a>方法三(推荐)</h4><p>使用 <strong>nvm</strong> 。nvm 可以在一台电脑上管理不同版本的 node，并且使用 nvm 安装 npm 后，npm 默认的安装路径是有读写权限的，也就是说，以后 npm 安装任何包都用再使用 <code>sudo</code> 参数了。</p>
 <p>官网的解决方案：<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener"><a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener">https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally</a></a>；</p>
 <p>这里有个细节要注意：如果你本地已经安装了npm，你得先把本地的npm卸载，再安装nvm，再使用nvm安装npm；</p>
 <p><strong>1.卸载已安装到全局的 node/npm</strong></p>
@@ -559,9 +570,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
           
-            <a href="/tags/web前端/" rel="tag"># web前端</a>
+            <a href="/tags/web前端/" rel="tag"><i class="fa fa-tag"></i> web前端</a>
           
         </div>
       
@@ -834,5 +845,8 @@
 
   
 
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/clicklove.js"></script>
 </body>
 </html>
