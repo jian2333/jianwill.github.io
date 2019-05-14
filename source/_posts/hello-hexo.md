@@ -84,7 +84,7 @@ jshint
 
 #### 方法三(推荐)
 
-使用 **nvm** 。nvm 可以在一台电脑上管理不同版本的 npm，并且使用 nvm 安装 npm 后，npm 默认的安装路径是有读写权限的，也就是说，以后 npm 安装任何包都用再使用 `sudo` 参数了。
+使用 **nvm** 。nvm 可以在一台电脑上管理不同版本的 node，并且使用 nvm 安装 npm 后，npm 默认的安装路径是有读写权限的，也就是说，以后 npm 安装任何包都用再使用 `sudo` 参数了。
 
 官网的解决方案：[<https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally>](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)；
 
