@@ -1,5 +1,5 @@
 ---
-title: hello hexo
+title: Hello Hexo
 date: 2019-05-14 19:46:17
 categories: 
 - 学习笔记

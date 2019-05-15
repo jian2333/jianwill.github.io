@@ -34,7 +34,6 @@ post:
   wordcount: 字数统计
   min2read: 阅读时长
   totalcount: Site words total count
-  comments: 评论数
   copyright:
     author: 本文作者
     link: 本文链接
