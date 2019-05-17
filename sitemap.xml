@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jian2333.github.io/2019/05/14/hello-hexo/</loc>
+    
+    <lastmod>2019-05-17T09:57:32.311Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jian2333.github.io/2019/05/13/Migrate-Blog/</loc>
     
     <lastmod>2019-05-17T05:34:48.644Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://jian2333.github.io/2019/05/12/hello-world/</loc>
     
     <lastmod>2019-05-17T03:51:51.488Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jian2333.github.io/2019/05/14/hello-hexo/</loc>
-    
-    <lastmod>2019-05-17T02:56:58.409Z</lastmod>
     
   </url>
   
