@@ -82,7 +82,7 @@ jshint
 
 #### 方法三(推荐)
 
-使用 **nvm** 。nvm 可以在一台电脑上管理不同版本的 node，并且使用 nvm 安装 npm 后，npm 默认的安装路径是有读写权限的，也就是说，以后 npm 安装任何包都用再使用 `sudo` 参数了。
+使用 **nvm** 。nvm 可以在一台电脑上管理不同版本的 node，并且使用 nvm 安装 npm 后，npm 默认的安装路径是有读写权限的，也就是说，以后 npm 安装任何包都不用再使用 `sudo` 参数了。
 
 官网的解决方案：[<https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally>](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)；
 
@@ -128,9 +128,9 @@ yum install node
 
 ### 部署分支问题
 
-由于 hexo 部署(`hexo d`) 的原理是，把站点上的所有静态文件删除，并把本地待部署的全部静态站点文件(/public/目录下) push 到远程库上，即完全覆盖；所以 hexo 官方文档有这样一句话 **建议使用master作为写作分支，新建一个public分支作为发布分支**。在按照这样创建分支后，发现网站打不开，然后在github的文档里看到这样几句话：
+由于 hexo 部署(`hexo d`) 的原理是，把站点上的所有静态文件删除，并把本地待部署的全部静态站点文件(/public/目录下) push 到远程库上，即完全覆盖；所以 hexo 官方文档有这样一句话 **建议使用 master 作为写作分支，新建一个 public 分支作为发布分支**。在按照这样创建分支后，发现网站打不开，然后在 [github pages](https://help.github.com/en/articles/configuring-a-publishing-source-for-github-pages) 的文档里看到这样几句话：
 
-- Reponsitory 必须以 username.github.io 命令，这个username为github的账户名，网站部署成功后，使用 http://username.github.io 进行访问；
+- Reponsitory 必须以 username.github.io 命令，这个 username 为 github 的账户名，网站部署成功后，使用 http://username.github.io 进行访问；
 - 必须使用 **master** 分支管理网站静态文件。注意这句话，必须使用 **master** 分支。emmmmm….. 就是这么坑。
 
 所以，github的建议是：
