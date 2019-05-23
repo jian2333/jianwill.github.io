@@ -5,7 +5,7 @@ top:
 categories:
 - 学习笔记
 tags:
-- 前端
+- web前端
 - 浏览器
 ---
 
