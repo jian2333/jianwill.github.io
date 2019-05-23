@@ -130,7 +130,7 @@ yum install node
 
 由于 hexo 部署(`hexo d`) 的原理是，把站点上的所有静态文件删除，并把本地待部署的全部静态站点文件(/public/目录下) push 到远程库上，即完全覆盖；所以 hexo 官方文档有这样一句话 **建议使用 master 作为写作分支，新建一个 public 分支作为发布分支**。在按照这样创建分支后，发现网站打不开，然后在 [github pages](https://help.github.com/en/articles/configuring-a-publishing-source-for-github-pages) 的文档里看到这样几句话：
 
-- Reponsitory 必须以 username.github.io 命令，这个 username 为 github 的账户名，网站部署成功后，使用 http://username.github.io 进行访问；
+- Reponsitory 必须以 username.github.io 命令，这个 username 为 github 的账户名，网站部署成功后，使用 https://username.github.io 进行访问；
 - 必须使用 **master** 分支管理网站静态文件。注意这句话，必须使用 **master** 分支。emmmmm….. 就是这么坑。
 
 所以，github的建议是：
