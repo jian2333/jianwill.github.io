@@ -165,9 +165,9 @@ UC浏览器（ `Blink+Trident`）
 
 参考文章：
 
-[浏览器内核-渲染引擎、js引擎](https://blog.csdn.net/BonJean/article/details/78453547)
+[1. 浏览器内核-渲染引擎、js引擎](https://blog.csdn.net/BonJean/article/details/78453547)
 
-[五大主流浏览器与四大内核](https://blog.csdn.net/yuyanjing123456789/article/details/78689595)
+[2. 五大主流浏览器与四大内核](https://blog.csdn.net/yuyanjing123456789/article/details/78689595)
 
-[聊聊浏览器内核](https://segmentfault.com/a/1190000011064695)
+[3. 聊聊浏览器内核](https://segmentfault.com/a/1190000011064695)
 
