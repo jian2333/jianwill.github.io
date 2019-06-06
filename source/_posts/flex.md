@@ -31,6 +31,14 @@ CSS3 引入了一种新的布局模式————弹性盒子。
 
 `flex-direction` ：`弹性子元素` 在 `弹性容器` 内 **水平方向** 上的排列规则。
 
+**注意，这很重要：**
+
+- `flex-direction` 方向不同( `row` ，`column` )，会导致其他6个 flex 属性( `flex-wrap`，`felx-flow`，`justify-content`，`align-content`，`align-items`，`align-self` )的方向也不同！！
+- 后面6个 flex 属性的例子中，`flex-direction` 都为 `row` 。
+- 如果 `flex-direction` 改成 `column` ，会导致方向与现在的例子相反。即 `水平xx` 的都会变成 `垂直xx` ，而 `垂直xx` 的会变成 `水平xx` 。 
+
+</br>
+
 主要有以下几个值：`row`、`row-reverse`、`column`、`column-reverse`、`initial`、`inherit` 。
 
 **row**
