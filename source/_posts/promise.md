@@ -59,7 +59,7 @@ tags:
   // 方法1
   var promise1 = new Promise(function(resolve, reject) {
     resolve('11');
-    resolve(new Error('22'));
+    reject(new Error('22'));
   });
   
   // 方法2
