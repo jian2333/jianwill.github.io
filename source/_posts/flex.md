@@ -150,6 +150,8 @@ CSS3 引入了一种新的布局模式————弹性盒子。
 
 `align-content` ：`弹性子元素` 关于 `弹性盒子` 水平轴，在垂直方向上的分布规则。
 
+**提示：** 使用该参数时必须同时使用 `flex-wrap: wrap` 或 `flex-flow: xxx wrap` (`wrap-reverse` 也可)。
+
 主要有以下几个值：`stretch`、`flex-start`、`flex-end`、`center`、`space-between`、`space-around`、`initial`、`inherit` 。
 
 **stretch** ：
