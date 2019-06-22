@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jian2333.github.io/2019/05/31/flex/</loc>
+    
+    <lastmod>2019-06-22T03:35:59.668Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jian2333.github.io/2019/06/14/promise/</loc>
     
     <lastmod>2019-06-21T10:39:31.388Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://jian2333.github.io/2019/06/12/professional-js/</loc>
     
     <lastmod>2019-06-12T12:59:35.943Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jian2333.github.io/2019/05/31/flex/</loc>
-    
-    <lastmod>2019-06-06T05:43:02.236Z</lastmod>
     
   </url>
   
