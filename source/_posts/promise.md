@@ -269,7 +269,7 @@ tags:
       xhr.onerror = function () {
         reject(new Error(xhr.statusText));
       };
-      xhr.send();
+      xhr.send(null);
     });
   }
   // 运行示例
