@@ -159,7 +159,11 @@ tags:
 
 **all**
 
-- `Promise.all` ：传入一个 `promise` 对象的数组作为参数，只有当数组里的 **所有**  `promise` 对象全部变为 `resolve` 或 `reject` 时，才会调用 `then` 里相应的回调函数方法；
+- `Promise.all` ：传入一个 `promise` 对象的数组作为参数，只有当数组里的 **所有**  `promise` 对象 **全部** 变为 `resolve` 或 `reject` 时，才会调用 `then` 里相应的回调函数方法；
+
+- 数组中的多个 `promise` 一起 **同时开始，并行执行** 。
+
+- 所以顺序是：`arr[0],arr[1+...] --> then` 。
 
   ```js
   var promise1 = new Promise(function(resolve, reject){
@@ -189,6 +193,10 @@ tags:
 **race**
 
 - `Promise.race` ：和 `Promise.all` 类似，区别是 **只要有一个** `promise` 对象变为 `resolve` 或 `reject` 时，就会调用 `then` 方法；
+
+- `then` 方法执行完后，数组中后续的 `promise` 还会继续执行。
+
+- 所以顺序是：`arr[0] --> then --> arr[1+...]` 。
 
   ```js
   var promise1 = new Promise(function(resolve, reject){
