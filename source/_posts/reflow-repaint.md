@@ -106,7 +106,7 @@ js方面主要是从 `DOM` 角度来优化重排重绘。包括以下几方面�
 
   ```js
   var list = document.getElementById('myList'),
-  		html = '',
+      html = '',
       i = 0;
   for (i=0;i<10;i++) {
     html += '<li>item' + i + '</li>/br';
