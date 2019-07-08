@@ -175,3 +175,11 @@ git config user.email "yyy@qq.com"
 ```
 
 OK！大功告成 ！
+
+---
+
+更新：`hexo` 中 `git` 记录正常，但直接部署的脚本 `hexo d` 异常，该脚本~~貌似使用全局参数？~~ 就是使用的全局 `user.name` 和 `user.email` ....
+
+关于如何修改 `hexo d` 使用当前项目的 `user.name` 和 `user.email` 
+
+参考 [能否hexo deploy 时指定git账户 #2125](https://github.com/hexojs/hexo/issues/2125) 。

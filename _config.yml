@@ -91,6 +91,8 @@ deploy:
   repo: git@github.com:jian2333/jianwill.github.io.git
   branch: master
   message:
+  name: Jianmbp
+  email: 314710634@qq.com
 
 search:
   path: search.xml
