@@ -69,8 +69,6 @@ git config --global --unset user.name
 git config --global --unset user.email
 ```
 
-
-
 #### 为每个账号生成一对密钥
 
 首先进入保存密钥的目录：
@@ -148,6 +146,12 @@ IdentityFile ~/.ssh/id_rsa_gitea
 - 先在本地复制公钥。进入 `.ssh` 目录，复制 `id_rsa_github.pub` 里的公钥。
 - 然后登陆 `github`，添加复制的公钥。
 - ![](/images/mg-3.jpg)
+
+可以使用以下命令来测试，是否配置成功：
+
+```bash
+ssh -T git@github.com
+```
 
 ### 如何使用
 
