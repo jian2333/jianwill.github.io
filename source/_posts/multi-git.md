@@ -165,6 +165,12 @@ ssh -T git@github.com
 
 不需要任何操作，`git clone` 的时候会要求你输入 `user.name` 和 `user.email` 。
 
+**PS：**关于保存密码：
+
+- 第一次 `git clone`、`git pull`、`git push` 的时候会要求你输入密码，输入之后可以选择 **永久保存** ，如果之后 `github/gitlab/gitea` 的账号密码修改了，在进行相应操作时会要求你重新输入密码。
+- 如果点了取消，以后每次 `git pull`、`git push` 都要输入用户名和密码，很麻烦...可以通过以下命令记住密码(仅限 `http协议` )。
+- 输入 `git config credential.helper store` ，输入之后下次 `git pull`、`git push` 时会要求输入密码，输入一次后 `git` 就会一直记住了。
+
 #### 如果是本地已有的仓库
 
 需要配置每个仓库的 `user.name` 和 `user.email` ：
