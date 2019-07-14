@@ -24,8 +24,8 @@ favicon:
   hidden: /images/failure.ico
   show_text: (/≧▽≦/)咦！又好了！
   hide_text: (●—●)喔哟，崩溃啦！
-  apple_touch_icon: /images/header/mh1-2.jpg
-  safari_pinned_tab: /images/header/mh1-2.jpg
+  apple_touch_icon: /images/header/avatar-2.jpg
+  safari_pinned_tab: /images/header/avatar-2.jpg
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
@@ -144,7 +144,7 @@ links:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: /images/header/mh1-2.jpg
+avatar: /images/header/avatar-2.jpg
 
 # Table Of Contents in the Sidebar
 toc:
@@ -798,11 +798,11 @@ css: css
 js: js
 images: images
 
-header_bg: /images/header/m1-1.jpg
+header_bg: /images/header/bg-1.jpg
 
 card:
-  avatar: /images/header/mh1-1.jpg
-  name: Jianww
+  avatar: /images/header/card-2.jpg
+  name: 
   description: 这个人很懒...
 
 footer:
