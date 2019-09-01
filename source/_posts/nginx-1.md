@@ -119,7 +119,7 @@ sudo brew install nginx
 
 **需求**
 
-公司的后端接入了网关，对域名有校验，只有符合规的域名才能调用网关
+公司的后端接入了网关，对域名有校验，只有符合规则的域名才能调用网关
 
 于是，本地开发的时候，如果用 `http://localhost:3001` 去调开发环境的后端，会失败，因为通过不了网关
 
@@ -138,14 +138,14 @@ sudo brew install nginx
 `配置 host 文件`
 
 ```
-// host 文件
+# host 文件
 127.0.0.1 xxx.ym
 ```
 
 `配置 nginx.conf 文件`
 
 ```
-// nginx.conf 文件
+# nginx.conf 文件
 server {
         listen       80;
         server_name  xxx.ym;
@@ -195,7 +195,7 @@ npm run dev
 
 在浏览器输入 `http://xxx.ym` 打开就可以啦
 
-#### 搭配 `host文件`
+#### 搭配 `host` 文件
 
 搭配 `host` 文件，可以在本地 **打开任意域名，跳转到任意想跳转的地址**，包括但不限于跳转到 `https://www.google.com`，`https://www.baidu.com`，`http://localhost:4000` 等任意地址。
 
@@ -212,13 +212,13 @@ npm run dev
 - 举个🌰，下面的配置可以把 `longge666.huiwan` 映射成本地的 `http://localhost:4000`：
 
   ```
-  // host 文件
-  // .com域名 chrome会自动转换成 https，跳转不了
+  # host 文件
+  # .com域名 chrome会自动转换成 https，跳转不了
   127.0.0.1 longge666.huiwan
   ```
 
   ```
-  // nginx.conf 文件
+  # nginx.conf 文件
   server {
           listen       80;
           server_name  longge666.huiwan;
