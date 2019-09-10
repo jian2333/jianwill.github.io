@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[ss + proxifier 实现vpn游戏代理]]></title>
     <url>%2F2019%2F09%2F10%2Fsstovpn%2F</url>
-    <content type="text"><![CDATA[之前搭了一个 ss (搭建教程可以参考 自建ss/ssr服务器教程)，但是 ss 只能在浏览器上用，如果想要实现 vpn 代理游戏的效果的话，怎么办呢？好在这个问题已经有解决方案了，就是搭配 Proxifier 使用， 即可实现 vpn 游戏代理的效果。接下来，就是设置 proxifier 的步骤。下载 ss 和 proxifier下载 ssWindows SSR客户端 ：下载地址Mac SSR客户端 ：下载地址下载 proxifierWindows 便携版 ：官网地址Windows 安装版 ：官网地址Mac版 ：官网地址实现步骤启动ss启动并设置好 ss ，保证能正常运行即可。启动并设置 proxifier启动 proxifier 后，要配置以下三个步骤：代理服务器设置代理规则设置域名解析设置代理服务器设置profile –&gt; Proxy Servers添加 Server设置 Address 和 Port修改 ProtocolCheckOK代理规则设置profile –&gt; Proxification Rules设置 Localhost设置 需要代理的游戏，比如 GTAV设置 默认连接方式域名解析设置profile –&gt; Name Resolution设置 通过代理服务器解析域名设置 不解析以下主机效果图下面是 ss + proxifier 代理后，启动 GTAV 的效果图然后，终于可以愉快的体验 GTAV 赌场DLC 了…[手动狗头，滑鸡！]]]></content>
+    <content type="text"><![CDATA[之前搭过一个 ss (搭建教程可以参考 自建ss/ssr服务器教程)，但 ss 只能在浏览器上用，如果想像 vpn 一样代理游戏的话，该怎么办呢？好在这个问题已经有解决方案了，就是搭配 Proxifier 使用。下面，就是设置 Proxifier 的步骤。下载 ss 和 Proxifier下载 ssWindows SSR客户端 ：下载地址Mac SSR客户端 ：下载地址下载 ProxifierWindows 便携版 ：官网地址Windows 安装版 ：官网地址Mac版 ：官网地址实现步骤启动ss启动并设置好 ss ，保证能正常运行即可。启动并设置 Proxifier启动 Proxifier 后，要配置以下三个步骤：代理服务器设置代理规则设置域名解析设置代理服务器设置profile –&gt; Proxy Servers添加 Server设置 Address 和 Port修改 ProtocolCheckOK代理规则设置profile –&gt; Proxification Rules设置 Localhost设置 需要代理的游戏，比如 GTAV设置 默认连接方式域名解析设置profile –&gt; Name Resolution设置 通过代理服务器解析域名设置 不解析以下主机效果图下面是 ss + Proxifier 代理后，启动 GTAV 的效果图然后，终于可以愉快的体验 GTAV 赌场DLC 了…(手动狗头，滑鸡!)]]></content>
       <categories>
         <category>一起哈啤</category>
       </categories>
@@ -99,8 +99,8 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>js</tag>
         <tag>webpack</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
