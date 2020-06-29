@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jian2333.github.io/2020/06/29/vue-router/</loc>
+    
+    <lastmod>2020-06-29T07:08:40.801Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jian2333.github.io/2020/06/24/eslint-and-babel/</loc>
+    
+    <lastmod>2020-06-24T07:07:06.631Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jian2333.github.io/2019/09/05/regexp/</loc>
     
-    <lastmod>2020-01-16T07:02:06.906Z</lastmod>
+    <lastmod>2020-03-18T07:55:22.686Z</lastmod>
     
   </url>
   

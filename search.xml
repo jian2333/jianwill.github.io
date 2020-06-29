@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Vue Router]]></title>
+    <url>%2F2020%2F06%2F29%2Fvue-router%2F</url>
+    <content type="text"><![CDATA[断断续续看了好多遍 Vue Router 的官方文档，终于下定决心来写一篇笔记了…..OK，开始正题完整介绍的话内容太多，本文主要介绍工作中较常用到的几个知识点router/routerouterVue Router 对象，包含了 Vue Router 的一些属性和方法Vue Router 属性router.app: 配置了 router 的Vue根实例。router.mode: 路由使用的模式。router.currentRoute: 当前激活的路由实例，同 this.$route。Vue Router 方法router.beforeEach: 全局前置守卫，必须调用 next() 方法。router.beforeResolve: 全局解析守卫，必须调用 next() 方法。router.afterEach: 全局后置钩子，无 next() 方法。router.push: 打开一个新路由/页面，会在浏览器添加历史记录。router.replace: 打开/替换为一个新路由/页面，不会在浏览器添加历史记录。router.go: 前进 n 个页面，n 可为负数。router.back: 等同于 router.go(-1)。router.forward: 等同于 router.go(1)。router.getMatchedComponents: 返回目标位置或是当前路由匹配的组件数组(是组件的定义/构造类，不是实例)，一般用于服务端渲染的数据预加载使用。router.resolve: 解析目标位置。router.addRoutes: 动态添加更多的路由规则。router.onReady: 把一个回调排队。router.onError: 注册一个回调，该回调在路由导航过程中出错时被调用。route当前激活的路由实例，所有属性只读$route.path: 当前路由的绝对路径。$route.params: 当前路由上 key/value对象 参数。$route.query: 当前对象的 URL 上的 key/value对象 参数，会显示在浏览器地址栏上。$route.hash: 当前路由的 hash 值(带 #)。$route.fullPath: 完成解析后的 URL，包含查询参数和 hash 的完整路径。$route.matched: 一个匹配路由的数组。从根路由开始到当前所在路由的所有嵌套路径片段组成的数组。$route.name: 当前路由的 name。$route.redirectedForm: 重定向来源的路由的名字。组件注入通过在 Vue 根实例的 router 配置传入 router 实例，下面这些属性成员会被注入到每个子组件。this.$router : router 实例。this.$route : 当前激活的路由实例，所有属性只读。导航守卫全局导航守卫beforeEach: 全局前置守卫，导航前，一定要调用 next() 来 resolve 这个钩子。beforeResolve: 全局解析守卫，导航前，和 beforeEach 类似，区别是导航在确认前，同时在所有组件内守卫和异步路由组件解析之后，解析守卫才会被调用。afterEach: 全局后置钩子，导航后，无 next() 方法也不会改变导航本身(可添加页面定位等功能)。路由独享的守卫beforeEnter: 路由独享守卫，配置在路由上的守卫，该路由及其子路由都会共享该守卫。组件内守卫beforeRouteEnter: 渲染该组件对应的路由被 confirm 前调用，不能获取 this，但可通过传回调(唯一一个可以传回调给 next 的守卫)给 next() 来访问组件实例。12345beforeRouteEnter (to, from, next) =&gt; &#123; next(vm =&gt; &#123; // 通过 `vm` 访问组件实例 &#125;)&#125;beforeRouteUpdate: 路由改变，但是该组件被复用时调用。beforeRouteLeave: 导航离开该组件的对应路由时调用。123456789101112131415161718const Foo = &#123; template: `...`, beforeRouteEnter (to, from, next) &#123; // 在渲染该组件的对应路由被 confirm 前调用 // 不！能！获取组件实例 `this` // 因为当守卫执行前，组件实例还没被创建 &#125;, beforeRouteUpdate (to, from, next) &#123; // 在当前路由改变，但是该组件被复用时调用 // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候， // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。 // 可以访问组件实例 `this` &#125;, beforeRouteLeave (to, from, next) &#123; // 导航离开该组件的对应路由时调用 // 可以访问组件实例 `this` &#125;&#125;完整的导航解析流程导航被触发。在失活的组件里调用 beforeRouteLeave 守卫。调用全局的 beforeEach 守卫。在重用的组件里调用 beforeRouteUpdate 守卫（2.2+）。在路由配置里调用 beforeEnter 。解析异步路由组件。在被激活的组件里调用 beforeRouteEnter 。调用全局的 beforeResolve 守卫（2.5+）。导航被确认。调用全局的 afterEach 钩子。触发 DOM 更新。用创建好的实例调用 beforeRouteEnter 守卫传递给 next 的回调函数。其他falsy/falsey(虚值)在 Boolean 上下文中认定为 false 的值。Javascript 在需要用到 Boolean 类型的值的上下文中使用强制类型转换将值转换为 Boolean 值，比如条件语句和循环中。目前 Js 中只有7个 falsy 值：false、0、0n、&quot;&quot;/&#39;&#39;/、``、 null、undefined、NaN滚动行为scrollBehavior(to, from, savedPosition): 添加在路由实例 new Router({}) 中，用于自定义切换时页面如何滚动。该功能只在支持 history.pushState 的浏览器中可用。keep-alive 中无效，因为 keep-alive 已自动保留了之前的状态。返回滚动的位置信息：{ x: number, y: number } : 具体位置。{ selector: string, offset? : { x: number, y: number }} : 锚点+偏移量更多参考]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[eslint && babel]]></title>
+    <url>%2F2020%2F06%2F24%2Feslint-and-babel%2F</url>
+    <content type="text"><![CDATA[关于eslint和babel的一点理解：eslint: 代码语法校验，主要是语法的使用是否正确，附带也可以格式化代码风格。babel: 转义代码，将浏览器不支持的新语法，转义成浏览器支持的语法。所以使用babel，我们就可以 毫无顾忌 的使用新语法了。但有时候吧，eslint 校验新语法时识别不了，就会报错了，这时候babel-eslint就登场了。babel-eslint: 将eslint无法识别的新语法转义成eslint可以识别的语法，进而通过eslint校验。babel-eslint需搭配eslint一起使用。题外话：babel有多种引入方式，最新的推荐方式是 按需转义格式化(统一)代码风格，还可以使用以下2种方式。主要是改变代码的显示风格，并不会对代码的语法规则做校验：.editorconfig: 本地配置文件，一般用于换行、缩进等。.prettierrc：当前主流的方法。所有规则基本都可配置。搭配 webstorm file watch 可实现 保存时自动格式化/提交代码时自动格式化]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[一种新的科学上网方式 -- v2ray]]></title>
     <url>%2F2020%2F01%2F05%2Fv2ray%2F</url>
     <content type="text"><![CDATA[由于某些众所周知的原因，emmmmm….，不久前的血色十月，一大波梯子被封了。毫无意外，我的 ss 也被封了，而且从那之后，ss 就变得不好用了，速度慢，还经常上不了网。然后吧，研究了下目前比较主流的方式 v2ray ，包括 搭建方式 、速度优化、ip伪装防封 等，发现 v2ray : ws + tls + nginx + dns 的方式速度和伪装性都很好。再然后吧，今天就总结一下这个好了…..本文主要总结了以下几个方面：最终总结及推荐名词解释具体搭建流程效果相关资料介绍最终总结及推荐根据实际测试下来的结果，最终推荐 google云香港服务器+ws+tls+nginx+伪装主页+bbr 这种配置。不推荐使用 dns 。因为免费的 dns 虽然能隐藏真实ip，但是会 大大降低网络速度，再加上 ws+tls+nginx+伪装主页，已经能达到很好的欺骗 GFW 的效果了，而收费的 dns 虽然效果好，但是太贵了！所以不推荐使用 dns服务器速度最快的供应商是 google云，其次是 搬瓦工，最后是 vultr。香港服务器最快(vultr没有香港服务器)。搬瓦工 服务器速度：香港服务器 &gt; CN2 GIA-E = CN2 GIA &gt; KVM = vultr 。协议mkcp 协议搭建简单，但是速度不够快，伪装还行，但在有些场合连接不稳定(比如 在公司网络 ，我就经常连不上….. )。ws+tls 协议搭建复杂一下，需要有域名，但是速度快，而且稳定，在公司网络，一样稳如老狗！！ws+tls+nginx+cdn 伪装性更好，但是更复杂，需要懂一些nginx的相关配置，还要会cdn代理伪装。不过不推荐 cdn 代理。原因之前说到了：免费的 大大降低网速，收费的太贵。(免费的cloudflare服务器在美国，ping 变成200+， 直连google云香港服务器 ping 才20+，速度差10倍)。ws+tls+nginx+主页伪装 已经能很好的伪装了，能 很好的骗过 GFW 了 。所以推荐的是 ws+tls+nginx+伪装主页。bbr加速bbr 是 google 的一种算法加速，对速度 影响极大，强烈推荐开启。就我测试而言，同样配置 youtube 4K 60fps 下，未开启 bbr 速度为 20k Kbps，开启 bbr 后为 150k Kbps，速度相差极大。直接使用一键安装脚本里的命令开启即可，选择 bbrPlus版本，即 11-2-7 。名词解释一键安装脚本一键安装 v2ray+ws+tls+nginx+https证书+https证书定时续签+bbr ，bbr 需单独手动启动。1bash &lt;(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log相关路径：Web 目录：/home/wwwroot/3DCEListV2ray 服务端配置：/etc/v2ray/config.jsonV2ray 客户端配置: ~/v2ray_info.txtNginx 目录： /etc/nginx证书文件: /data/v2ray.key 和 /data/v2ray.crtcdn用来 伪装真实ip，还有防 DDOS流量攻击 等其他功能。cloudflare一个免费配置 cdn 的网站，但是不推荐使用，原因前面有说到，会 大大降低网络速度。wswebsocket ，一种协议。需要有域名。把翻墙流量伪装成正常访问配置域名的流量。tls一种加密协议，需要使用域名。一般配合 ws 使用。nginx服务器配置 web网站 使用，配置一个 .html 文件 伪装成静态网站。https证书给伪装的 web 网站添加证书，让网站更真实。证书有效期3个月，一键安装脚本 会自动 申请，下载证书，并添加 证书自动续签任务，但是，需要自己修改nginx配置，选择证书路径！！具体搭建流程申请域名可以在 freenom 申请免费的域名。不过这个网站注册比较麻烦…..也可以在 阿里云，腾讯云 等注册，都可以。配置cdn免费的话可以在 cloudflare 配置 cdn。配置时，代理 Proxy status 记得点成灰色，在 bbr 安装完成后，在决定点亮。点亮不点亮都可以使用，点亮即使用代理，伪装了真实ip，但速度会慢很多，不点亮即直连。配置好后，需要在 域名管理 的地方(比例如阿里云-&gt;域名-&gt;管理-&gt;cdn)，将 dns 的2个地址添加上去。创建vm实例使用主机供应商添加 vm实例即可，推荐 google云， 速度最快。以下以 google 为标准：创建 vm 实例选择 香港+N1+f1-micro+勾选http、https+网络标记rz,cz编辑防火墙规则 rz ：方向：入站；目标：网络中的实例；来源过滤条件：IP地址范围；来源IP地址范围：0.0.0.0/0编辑防火墙规则 cz：方向：出站；目标：网络中的实例；来源过滤条件：IP地址范围；来源IP地址范围：0.0.0.0/0一键脚本安装在 google云 vm实例 页面，点击 SSH 链接：输入 sudo -i 获取 root 权限；输入一键安装脚本1bash &lt;(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log按要求输入域名，等待脚本执行完成即可。修改nginx配置文件添加 nginx 命令到环境变量12echo PATH=$PATH:/etc/nginx/sbin &gt;&gt; /etc/profilesource /etc/profile下载并修改nginx配置文件窗口右上角下载，下载后编辑，主要修改 域名、端口号、/ptah、https证书路径可以参考下面的配置该配置做了以下几件事：重定向 http(80端口) 到 https(443端口)。重定向 /path 或 websocket 协议到 23188 端口，v2ray ws 协议用。修改 https证书路径。修改 域名、端口号。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133user root;worker_processes 3;#error_log logs/error.log;#error_log logs/error.log notice;#error_log logs/error.log info;#pid logs/nginx.pid;events &#123; worker_connections 4096;&#125;http &#123; include mime.types; default_type application/octet-stream; #log_format main '$remote_addr - $remote_user [$time_local] "$request" ' # '$status $body_bytes_sent "$http_referer" ' # '"$http_user_agent" "$http_x_forwarded_for"'; #access_log logs/access.log main; sendfile on; #tcp_nopush on; #keepalive_timeout 0; keepalive_timeout 65; #gzip on; server &#123; listen 80; server_name kxsw.jianwill.cn; return 301 https://kxsw.jianwill.cn:443; #charset koi8-r; #access_log logs/host.access.log main; location / &#123; root /home/wwwroot/3DCEList; index index.html index.htm; &#125; #error_page 404 /404.html; # redirect server error pages to the static page /50x.html # error_page 500 502 503 504 /50x.html; location = /50x.html &#123; root html; &#125; # proxy the PHP scripts to Apache listening on 127.0.0.1:80 # #location ~ \.php$ &#123; # proxy_pass http://127.0.0.1; #&#125; # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000 # #location ~ \.php$ &#123; # root html; # fastcgi_pass 127.0.0.1:9000; # fastcgi_index index.php; # fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name; # include fastcgi_params; #&#125; # deny access to .htaccess files, if Apache's document root # concurs with nginx's one # #location ~ /\.ht &#123; # deny all; #&#125; &#125; # another virtual host using mix of IP-, name-, and port-based configuration # #server &#123; # listen 8000; # listen somename:8080; # server_name somename alias another.alias; # location / &#123; # root html; # index index.html index.htm; # &#125; #&#125; # HTTPS server # server &#123; listen 443 ssl http2; server_name kxsw.jianwill.cn; ssl_certificate /data/v2ray.crt; ssl_certificate_key /data/v2ray.key; ssl_session_cache shared:SSL:1m; ssl_session_timeout 5m; ssl_ciphers HIGH:!aNULL:!MD5; ssl_prefer_server_ciphers on; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; location / &#123; root /home/wwwroot/3DCEList; index index.html index.htm; &#125; location /8fded3d7/ &#123; proxy_redirect off; proxy_pass http://127.0.0.1:23188; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; proxy_set_header Host $http_host; proxy_intercept_errors on; if ($http_upgrade = "websocket" )&#123; proxy_pass http://127.0.0.1:23188; &#125; &#125; &#125;include conf.d/*.conf;&#125;上传nginx.conf配置文件窗口右上角，上传文件，上传后到文件默认在 /home/google用户名/ 路径下，比如我的是 /home/jian23333/拷贝nginx.conf到nginx配置目录nginx 配置文件路径是 /etc/nginx/conf/所以，执行下面的命令123cd /home/jian23333/cp nginx.conf /etc/nginx/conf/// 默认会直接覆盖PS： 如果上传的时候，已经存在 nginx.conf，上传的文件会被命名为 nginx_(n).conf，后面执行命令的时候 ( 这个符号可能会识别报错，这时可以删掉原来的所有 nginx_(n).conf 文件，重新上传，就命名成 nginx.conf 文件了。删除命令12cd /home/jian23333/rm *.conf校验并重新启动nginx校验：nginx -t重新启动：nginx -s reload查看nginx是否启动：ps -ef | grep nginx，看是否有 master 的行如果校验报错，根据错误提示，修改配置文件。可以使用 vi /etc/nginx/conf/nginx.conf 直接修改，也可以使用上面的方式下载到本地，修改，再上传的方式。如果提示 nginx: command not found ，就是没有把 nginx 配置到环境变量中，重新执行上面的 第一步：添加nginx命令到环境变量 即可。安装bbr加速重新执行一键安装脚本1bash &lt;(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log依次选择11-2-7，即安装 bbrPlus期间会重启一次。经测试，发现 bbrPlus 比 bbr 加速效果更好。其他问题如果要更换域名，发现域名证书没有一起更新怎么办？删掉证书文件，重新执行一键安装脚本，选择重新安装 ws+tls+nginx12345cd /data/rm v2ray.crtrm v2ray.keybash &lt;(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log1效果bbr 加速后，youtube 4K 60fps ，速度可以达到 170k Kbps，网速 17m/s （我用的100M电信，稳定20k Kbps就可以流畅看 4K 60fps）。所以，现在是 秒开4K，8K用户体检极好！…而且还有伪装主页(https加密)地址为：kxsw.jianwill.cn相关资料介绍折腾了几个月，尝试了多家供应商不同地区的服务器，vultr 美国、巴黎、新加坡、日本等，google云 香港等，不同的协议 tcp、mckp伪装BT下载、mkcp伪装Facetime童话、mkcp伪装微信视频、websocket，cdn，nginx 等多种方案，最后决定使用 google云香港服务器+ws+tls+nginx+伪装主页 的方式。参考了很多资料，视频，下面为几个主要的。视频:v2ray+ws+tls+nginx文章:v2ray+ws+tls+nginx手动及一键脚本申请免费域名froomon免费cdn cloudflaregoogle云 gcpping测试]]></content>
@@ -33,8 +56,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>web前端</tag>
         <tag>后端</tag>
+        <tag>web前端</tag>
         <tag>正则表达式</tag>
       </tags>
   </entry>
@@ -59,9 +82,9 @@
       </categories>
       <tags>
         <tag>web前端</tag>
+        <tag>git</tag>
         <tag>vue</tag>
         <tag>iview</tag>
-        <tag>git</tag>
         <tag>webpack</tag>
         <tag>echarts</tag>
       </tags>
@@ -87,8 +110,8 @@
       <tags>
         <tag>web前端</tag>
         <tag>css</tag>
-        <tag>js</tag>
         <tag>性能优化</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -112,8 +135,8 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>webpack</tag>
         <tag>js</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>

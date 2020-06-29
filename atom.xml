@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jian2333.github.io/"/>
-  <updated>2020-01-05T17:05:17.046Z</updated>
+  <updated>2020-06-29T07:08:40.801Z</updated>
   <id>http://jian2333.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue Router</title>
+    <link href="http://jian2333.github.io/2020/06/29/vue-router/"/>
+    <id>http://jian2333.github.io/2020/06/29/vue-router/</id>
+    <published>2020-06-29T02:57:05.000Z</published>
+    <updated>2020-06-29T07:08:40.801Z</updated>
+    
+    <content type="html"><![CDATA[<p>断断续续看了好多遍 <code>Vue Router</code> 的<a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">官方文档</a>，终于下定决心来写一篇笔记了…..</p><p><img src="/images/vr-1.jpg" alt></p><p>OK，开始正题</p><a id="more"></a><p>完整介绍的话内容太多，本文主要介绍工作中较常用到的几个知识点</p><h3 id="router-route"><a href="#router-route" class="headerlink" title="router/route"></a>router/route</h3><h4 id="router"><a href="#router" class="headerlink" title="router"></a>router</h4><p><code>Vue Router</code> 对象，包含了 <code>Vue Router</code> 的一些属性和方法</p><p><strong>Vue Router 属性</strong></p><ul><li>router.app: 配置了 <code>router</code> 的Vue根实例。</li><li>router.mode: 路由使用的<a href="https://router.vuejs.org/zh/api/#mode" target="_blank" rel="noopener">模式</a>。</li><li>router.currentRoute: 当前激活的路由实例，同 <code>this.$route</code>。</li></ul><p><strong>Vue Router 方法</strong></p><ul><li>router.beforeEach: 全局前置守卫，必须调用 <code>next()</code> 方法。</li><li>router.beforeResolve: 全局解析守卫，必须调用 <code>next()</code> 方法。</li><li>router.afterEach: 全局后置钩子，无 <code>next()</code> 方法。</li><li>router.push: 打开一个新路由/页面，<strong>会</strong>在浏览器添加历史记录。</li><li>router.replace: 打开/替换为一个新路由/页面，<strong>不会</strong>在浏览器添加历史记录。</li><li>router.go: 前进 <code>n</code> 个页面，<code>n</code> 可为负数。</li><li>router.back: 等同于 <code>router.go(-1)</code>。</li><li>router.forward: 等同于 <code>router.go(1)</code>。</li><li>router.getMatchedComponents: 返回目标位置或是当前路由匹配的组件数组(是组件的定义/构造类，不是实例)，一般用于<strong>服务端渲染</strong>的数据预加载使用。</li><li>router.resolve: 解析目标位置。</li><li>router.addRoutes: 动态添加更多的路由规则。</li><li>router.onReady: 把一个回调排队。</li><li>router.onError: 注册一个回调，该回调在路由导航过程中出错时被调用。</li></ul><h4 id="route"><a href="#route" class="headerlink" title="route"></a>route</h4><p>当前激活的路由实例，所有属性<strong>只读</strong></p><ul><li>$route.path: 当前路由的<strong>绝对</strong>路径。</li><li>$route.params: 当前路由上 <code>key/value对象</code> 参数。</li><li>$route.query: 当前对象的 <code>URL</code> 上的 <code>key/value对象</code> 参数，会显示在浏览器地址栏上。</li><li>$route.hash: 当前路由的 <code>hash</code> 值(带 <code>#</code>)。</li><li>$route.fullPath: 完成解析后的 <code>URL</code>，包含查询参数和 <code>hash</code> 的完整路径。</li><li>$route.matched: 一个匹配路由的数组。从根路由开始到当前所在路由的所有嵌套路径片段组成的数组。</li><li>$route.name: 当前路由的 <code>name</code>。</li><li>$route.redirectedForm: 重定向来源的路由的名字。</li></ul><h4 id="组件注入"><a href="#组件注入" class="headerlink" title="组件注入"></a>组件注入</h4><p>通过在 Vue 根实例的 <code>router</code> 配置传入 router 实例，下面这些属性成员会被注入到每个子组件。</p><ul><li><strong>this.$router</strong> : <code>router</code> 实例。</li><li><strong>this.$route</strong> : 当前激活的路由实例，所有属性<strong>只读</strong>。</li></ul><h3 id="导航守卫"><a href="#导航守卫" class="headerlink" title="导航守卫"></a>导航守卫</h3><h4 id="全局导航守卫"><a href="#全局导航守卫" class="headerlink" title="全局导航守卫"></a>全局导航守卫</h4><ul><li>beforeEach: 全局前置守卫，导航前，一定要调用 <code>next()</code> 来 <code>resolve</code> 这个钩子。</li><li>beforeResolve: 全局解析守卫，导航前，和 <code>beforeEach</code> 类似，区别是导航在确认前，<strong>同时在所有组件内守卫和异步路由组件解析之后</strong>，解析守卫才会被调用。</li><li>afterEach: 全局后置钩子，导航后，无 <code>next()</code> 方法也不会改变导航本身(可添加页面定位等功能)。</li></ul><h4 id="路由独享的守卫"><a href="#路由独享的守卫" class="headerlink" title="路由独享的守卫"></a>路由独享的守卫</h4><ul><li>beforeEnter: 路由独享守卫，配置在路由上的守卫，<strong>该路由及其子路由</strong>都会共享该守卫。</li></ul><h4 id="组件内守卫"><a href="#组件内守卫" class="headerlink" title="组件内守卫"></a>组件内守卫</h4><ul><li><p>beforeRouteEnter: 渲染该组件对应的路由被 <code>confirm</code> 前调用，<strong>不能</strong>获取 <code>this</code>，但可通过传回调(唯一一个可以传回调给 <code>next</code> 的守卫)给 <code>next()</code> 来访问组件实例。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter (to, <span class="keyword">from</span>, next) =&gt; &#123;</span><br><span class="line">  next(<span class="function"><span class="params">vm</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 通过 `vm` 访问组件实例</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>beforeRouteUpdate: 路由改变，但是该组件被复用时调用。</p></li><li><p>beforeRouteLeave: 导航离开该组件的对应路由时调用。</p></li><li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = &#123;</span><br><span class="line">  template: <span class="string">`...`</span>,</span><br><span class="line">  beforeRouteEnter (to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="comment">// 在渲染该组件的对应路由被 confirm 前调用</span></span><br><span class="line">    <span class="comment">// 不！能！获取组件实例 `this`</span></span><br><span class="line">    <span class="comment">// 因为当守卫执行前，组件实例还没被创建</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteUpdate (to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="comment">// 在当前路由改变，但是该组件被复用时调用</span></span><br><span class="line">    <span class="comment">// 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，</span></span><br><span class="line">    <span class="comment">// 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。</span></span><br><span class="line">    <span class="comment">// 可以访问组件实例 `this`</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteLeave (to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="comment">// 导航离开该组件的对应路由时调用</span></span><br><span class="line">    <span class="comment">// 可以访问组件实例 `this`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h4 id="完整的导航解析流程"><a href="#完整的导航解析流程" class="headerlink" title="完整的导航解析流程"></a>完整的导航解析流程</h4><ol><li>导航被触发。</li><li>在失活的组件里调用 <code>beforeRouteLeave</code> 守卫。</li><li>调用全局的 <code>beforeEach</code> 守卫。</li><li>在重用的组件里调用 <code>beforeRouteUpdate</code> 守卫（2.2+）。</li><li>在路由配置里调用 <code>beforeEnter</code> 。</li><li>解析异步路由组件。</li><li>在被激活的组件里调用 <code>beforeRouteEnter</code> 。</li><li>调用全局的 <code>beforeResolve</code> 守卫（2.5+）。</li><li>导航被确认。</li><li>调用全局的 <code>afterEach</code> 钩子。</li><li>触发 <code>DOM</code> 更新。</li><li>用创建好的实例调用 <code>beforeRouteEnter</code> 守卫传递给 <code>next</code> 的回调函数。</li></ol><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><strong>falsy/falsey(虚值)</strong></p><ul><li>在 <code>Boolean</code> 上下文中认定为 <code>false</code> 的值。</li><li><code>Javascript</code> 在需要用到 <code>Boolean</code> 类型的值的上下文中使用强制类型转换将值转换为 <code>Boolean</code> 值，比如条件语句和循环中。</li><li>目前 <code>Js</code> 中只有7个 <code>falsy</code> 值：<ul><li><code>false</code>、<code>0</code>、<code>0n</code>、<code>&quot;&quot;/&#39;&#39;/</code>、``、 <code>null</code>、<code>undefined</code>、<code>NaN</code></li></ul></li></ul><p><strong>滚动行为</strong></p><ul><li><code>scrollBehavior(to, from, savedPosition)</code>: 添加在路由实例 <code>new Router({})</code> 中，用于自定义切换时页面如何滚动。</li><li>该功能只在支持 <code>history.pushState</code> 的浏览器中可用。</li><li><code>keep-alive</code> 中无效，因为 <code>keep-alive</code> 已自动保留了之前的状态。</li><li>返回滚动的位置信息：<ul><li><code>{ x: number, y: number }</code> : 具体位置。</li><li><code>{ selector: string, offset? : { x: number, y: number }}</code> : 锚点+偏移量</li></ul></li><li><a href="https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html" target="_blank" rel="noopener">更多参考</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;断断续续看了好多遍 &lt;code&gt;Vue Router&lt;/code&gt; 的&lt;a href=&quot;https://router.vuejs.org/zh/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;官方文档&lt;/a&gt;，终于下定决心来写一篇笔记了…..&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/images/vr-1.jpg&quot; alt&gt;&lt;/p&gt;&lt;p&gt;OK，开始正题&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://jian2333.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="web前端" scheme="http://jian2333.github.io/tags/web%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="vue" scheme="http://jian2333.github.io/tags/vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>eslint &amp;&amp; babel</title>
+    <link href="http://jian2333.github.io/2020/06/24/eslint-and-babel/"/>
+    <id>http://jian2333.github.io/2020/06/24/eslint-and-babel/</id>
+    <published>2020-06-24T06:28:22.000Z</published>
+    <updated>2020-06-24T07:07:06.631Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于<code>eslint</code>和<code>babel</code>的一点理解：</p><p><code>eslint</code>: 代码语法校验，主要是语法的使用是否正确，附带也可以格式化代码风格。</p><p><code>babel</code>: 转义代码，将浏览器不支持的新语法，转义成浏览器支持的语法。所以使用<code>babel</code>，我们就可以 <strong>毫无顾忌</strong> 的使用新语法了。</p><p>但有时候吧，<code>eslint</code> 校验新语法时识别不了，就会报错了，这时候<code>babel-eslint</code>就登场了。</p><p><code>babel-eslint</code>: 将<code>eslint</code>无法识别的新语法转义成<code>eslint</code>可以识别的语法，进而通过<code>eslint</code>校验。<code>babel-eslint</code>需搭配<code>eslint</code>一起使用。</p><p>题外话：</p><ul><li><code>babel</code>有多种引入方式，最新的推荐方式是 <strong>按需转义</strong></li><li>格式化(统一)代码风格，还可以使用以下2种方式。主要是改变代码的显示风格，并不会对代码的<code>语法规则</code>做校验：<ul><li><code>.editorconfig</code>: 本地配置文件，一般用于<code>换行、缩进等</code>。</li><li><code>.prettierrc</code>：当前主流的方法。所有规则<code>基本都可配置</code>。搭配 <code>webstorm file watch</code> 可实现 <strong>保存时自动格式化/提交代码时自动格式化</strong></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;关于&lt;code&gt;eslint&lt;/code&gt;和&lt;code&gt;babel&lt;/code&gt;的一点理解：&lt;/p&gt;&lt;p&gt;&lt;code&gt;eslint&lt;/code&gt;: 代码语法校验，主要是语法的使用是否正确，附带也可以格式化代码风格。&lt;/p&gt;&lt;p&gt;&lt;code&gt;babel&lt;/code&gt;: 转义代
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://jian2333.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="web前端" scheme="http://jian2333.github.io/tags/web%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>一种新的科学上网方式 -- v2ray</title>
@@ -71,7 +120,7 @@
     <link href="http://jian2333.github.io/2019/09/05/regexp/"/>
     <id>http://jian2333.github.io/2019/09/05/regexp/</id>
     <published>2019-09-05T14:51:00.000Z</published>
-    <updated>2020-01-16T07:02:06.906Z</updated>
+    <updated>2020-03-18T07:55:22.686Z</updated>
     
     <content type="html"><![CDATA[<style>table{width:auto}</style><p>研究了一下正则表达式</p><p>理解的不深，但也有些心得</p><p>所以</p><p>做个总结～</p><p>哈哈哈</p><a id="more"></a><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>正则表达式在不同的语言有不同的使用方法</p><p>一般都是 <code>/^xxxx$/</code></p><p>其中：</p><ul><li><code>//</code> ：代表里面是正则表达式的匹配规则</li><li><code>^</code> ：表示正则表达式的开始</li><li><code>$</code> ：表示正则表达式的结束</li><li><code>xxx</code> ： 位于 <code>^</code> 和 <code>$</code> 之间的为正则表达式规则，用于匹配字符串等</li></ul><h3 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h3><p>说几个自身的理解吧</p><h4 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h4><table><thead><tr><th style="text-align:center">符号</th><th style="text-align:left">作用</th></tr></thead><tbody><tr><td style="text-align:center">^</td><td style="text-align:left">开始标识。方括号 <code>[ ]</code> 中表示不包含对应的集合</td></tr><tr><td style="text-align:center">$</td><td style="text-align:left">结束标识</td></tr><tr><td style="text-align:center">[ ]</td><td style="text-align:left">用于匹配具体的值，比如 <code>[A-Z] [A-Za-z] [0-9]</code></td></tr><tr><td style="text-align:center">( )</td><td style="text-align:left">用于整理表达式，确定匹配的优先级，类似数学中的 <code>()</code><br>用于分组，可用$1，$2 … 获取对应分组里的内容</td></tr><tr><td style="text-align:center">{ }</td><td style="text-align:left">用于设置匹配次数，如未设置，<strong>默认为1次</strong></td></tr><tr><td style="text-align:center">[竖杆]</td><td style="text-align:left">匹配两者中的一个，需用括号括起来，比如 <code>(0[竖杆][1-9][0-9]*)</code></td></tr><tr><td style="text-align:center">\</td><td style="text-align:left">转义字符</td></tr><tr><td style="text-align:center">.</td><td style="text-align:left">匹配除换行符 <code>\n</code> 之外的任何单字符。要匹配 <code>.</code> ，请使用 <code>\.</code></td></tr></tbody></table><h4 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h4><p>未使用限定符时，<strong>默认匹配1次</strong></p><table><thead><tr><th style="text-align:center">符号</th><th>作用</th></tr></thead><tbody><tr><td style="text-align:center">*</td><td>匹配前面的子表达式<strong>零次或多次</strong>。例如，zo<em> 能匹配”z” 以及 “zoo”。</em> 等价于{0,}。</td></tr><tr><td style="text-align:center">+</td><td>匹配前面的子表达式<strong>一次或多次</strong>。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td></tr><tr><td style="text-align:center">？</td><td>匹配前面的子表达式<strong>零次或一次</strong>。例如，”do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td></tr><tr><td style="text-align:center">{n}</td><td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td></tr><tr><td style="text-align:center">{n,}</td><td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td></tr><tr><td style="text-align:center">{n,m}</td><td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td></tr></tbody></table><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul><li><p><code>\d</code> ：数字</p></li><li><p>大写为原来的反的值：<code>\D</code> ：除数字之外的所有值</p></li><li><p>$1, $2… ：用于获取 <code>()</code> 对应分组里的内容，在 <code>replace</code> 等地方很常见。</p><ul><li><p>比如可以用 <code>$1,$2,$3</code> 获取年月日：<code>/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/</code> 。</p></li><li><p><code>&#39;2020/01/16&#39;.replace(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/, &#39;$1-$2-$3&#39;)</code></p><p><img src="/images/reg-1.jpg" alt></p></li></ul></li></ul><h3 id="常用🌰"><a href="#常用🌰" class="headerlink" title="常用🌰"></a>常用🌰</h3><ul><li><strong>0和非0开头的纯数字</strong> ：<code>/^(0|[1-9][0-9]*)$/</code></li><li><strong>非0开头的最多带两位小数的数字</strong> ：<code>/^([1-9][0-9]*)+(\.[0-9]{1,2})?$/</code></li><li><strong>带1～2位小数的正数或负数</strong> ：<code>/^(-)?([1-9][0-9]*)(\.d{1,2})?$/</code></li><li><strong>非负的整数或最多2位小数的数字(0.0, 0.00 未过滤掉)</strong> ：<code>/^(0|([1-9][0-9]*))(\.[0-9]{1,2})?$/</code></li><li><strong>非负的整数或最多2位小数的数字+2位字母(0.0, 0.00及加字母 未过滤掉)</strong> ：<code>/^(0|[1-9][0-9]*)(\.[0-9]{1,2})?([A-Za-z]{1,2})?$/</code></li></ul><h3 id="推荐资料"><a href="#推荐资料" class="headerlink" title="推荐资料"></a>推荐资料</h3><ul><li><a href="https://www.cnblogs.com/zxin/archive/2013/01/26/2877765.html" target="_blank" rel="noopener">1. 常用的正则表达式大全</a></li><li><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">2. 正则表达式 - 菜鸟教程</a></li><li><a href="https://www.baidufe.com/fehelper/regexp/index.html" target="_blank" rel="noopener">3. FeHelper</a></li></ul>]]></content>
     
@@ -84,9 +133,9 @@
       <category term="学习笔记" scheme="http://jian2333.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="web前端" scheme="http://jian2333.github.io/tags/web%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="后端" scheme="http://jian2333.github.io/tags/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="web前端" scheme="http://jian2333.github.io/tags/web%E5%89%8D%E7%AB%AF/"/>
     
       <category term="正则表达式" scheme="http://jian2333.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
@@ -136,11 +185,11 @@
     
       <category term="web前端" scheme="http://jian2333.github.io/tags/web%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="git" scheme="http://jian2333.github.io/tags/git/"/>
+    
       <category term="vue" scheme="http://jian2333.github.io/tags/vue/"/>
     
       <category term="iview" scheme="http://jian2333.github.io/tags/iview/"/>
-    
-      <category term="git" scheme="http://jian2333.github.io/tags/git/"/>
     
       <category term="webpack" scheme="http://jian2333.github.io/tags/webpack/"/>
     
@@ -192,9 +241,9 @@
     
       <category term="css" scheme="http://jian2333.github.io/tags/css/"/>
     
-      <category term="js" scheme="http://jian2333.github.io/tags/js/"/>
-    
       <category term="性能优化" scheme="http://jian2333.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="js" scheme="http://jian2333.github.io/tags/js/"/>
     
   </entry>
   
@@ -242,9 +291,9 @@
     
       <category term="web前端" scheme="http://jian2333.github.io/tags/web%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="webpack" scheme="http://jian2333.github.io/tags/webpack/"/>
-    
       <category term="js" scheme="http://jian2333.github.io/tags/js/"/>
+    
+      <category term="webpack" scheme="http://jian2333.github.io/tags/webpack/"/>
     
   </entry>
   
@@ -459,28 +508,6 @@
     </summary>
     
       <category term="其他" scheme="http://jian2333.github.io/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="hexo" scheme="http://jian2333.github.io/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://jian2333.github.io/2019/05/12/hello-world/"/>
-    <id>http://jian2333.github.io/2019/05/12/hello-world/</id>
-    <published>2019-05-12T11:46:17.000Z</published>
-    <updated>2019-05-17T03:51:51.488Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="http://jian2333.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="hexo" scheme="http://jian2333.github.io/tags/hexo/"/>
