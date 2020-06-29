@@ -58,7 +58,7 @@ OK，开始正题
 - $route.fullPath: 完成解析后的 `URL`，包含查询参数和 `hash` 的完整路径。
 - $route.matched: 一个匹配路由的数组。从根路由开始到当前所在路由的所有嵌套路径片段组成的数组。
 - $route.name: 当前路由的 `name`。
-- $route.redirectedForm: 重定向来源的路由的名字。
+- $route.redirectedFrom: 重定向来源的路由的名字。
 
 #### 组件注入
 
