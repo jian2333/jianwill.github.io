@@ -243,6 +243,15 @@ post_copyright:
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
+# Manual define the border radius in codeblock
+# Leave it empty for the default 1
+codeblock:
+  border radius: 6
+  # Add copy button on codeblock
+  copy_button:
+    enable: true
+    # Show text copy result
+    show_result: true
 
 # ---------------------------------------------------------------
 # Misc Theme Settings
@@ -802,7 +811,7 @@ header_bg: /images/header/bg-1.jpg
 
 card:
   avatar: /images/header/card-2.jpg
-  name: 
+  name:
   description: 这个人很懒...
 
 footer:
