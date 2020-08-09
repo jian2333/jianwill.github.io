@@ -12,7 +12,7 @@ tags:
 
 由于某些众所周知的原因，emmmmm....，不久前的血色十月，一大波梯子被封了。毫无意外，我的 `ss` 也被封了，而且从那之后，`ss` 就变得不好用了，速度慢，还经常上不了网。
 
-然后吧，研究了下目前比较主流的方式 `v2ray` ，包括 `搭建方式` 、`速度优化`、`ip伪装防封` 等，发现 `v2ray : ws + tls + nginx + dns` 的方式速度和伪装性都很好。
+然后吧，研究了下目前比较主流的方式 `v2ray` ，包括 `搭建方式` 、`速度优化`、`ip伪装防封` 等，发现 `v2ray : ws + tls + nginx + cdn` 的方式速度和伪装性都很好。
 
 再然后吧，今天就总结一下这个好了.....
 
@@ -28,7 +28,7 @@ tags:
 
 ### 最终总结及推荐
 
-根据实际测试下来的结果，最终推荐 **google云香港服务器+ws+tls+nginx+伪装主页+bbr** 这种配置。不推荐使用 `dns` 。因为免费的 `dns` 虽然能隐藏真实ip，但是会 **大大降低网络速度**，再加上 `ws+tls+nginx+伪装主页`，已经能达到很好的欺骗 `GFW` 的效果了，而收费的 `dns` 虽然效果好，但是**太贵了**！所以不推荐使用 `dns`
+根据实际测试下来的结果，最终推荐 **google云香港服务器+ws+tls+nginx+伪装主页+bbr** 这种配置。不推荐使用 `cdn` 。因为免费的 `cdn` 虽然能隐藏真实`ip`，但是会 **大大降低网络速度**，再加上 `ws+tls+nginx+伪装主页`，已经能达到很好的欺骗 `GFW` 的效果了，而收费的 `cdn` 虽然效果好，但是**太贵了**！所以不推荐使用 `cdn`。
 
 #### 服务器
 
@@ -40,7 +40,7 @@ tags:
 
 - `mkcp` 协议搭建简单，但是速度不够快，伪装还行，但在有些场合连接不稳定(比如 **在公司网络 ，我就经常连不上.....** )。
 - `ws+tls` 协议搭建复杂一下，需要有域名，但是速度快，而且稳定，**在公司网络，一样稳如老狗！！**
-- `ws+tls+nginx+cdn` 伪装性更好，但是更复杂，需要懂一些nginx的相关配置，还要会cdn代理伪装。不过不推荐 `cdn` 代理。原因之前说到了：
+- `ws+tls+nginx+cdn` 伪装性更好，但是更复杂，需要懂一些`nginx`的相关配置，还要会`cdn`代理伪装。不过不推荐 `cdn` 代理。原因之前说到了：
   - 免费的 **大大降低网速**，收费的太贵。(免费的`cloudflare`服务器在美国，`ping` 变成200+， 直连`google云香港服务器`  `ping` 才20+，速度差10倍)。
   - `ws+tls+nginx+主页伪装` 已经能很好的伪装了，能 **很好的骗过 `GFW` 了** 。
 - 所以推荐的是 `ws+tls+nginx+伪装主页`。
@@ -48,14 +48,14 @@ tags:
 #### bbr加速
 
 - `bbr` 是 `google` 的一种算法加速，对速度 **影响极大**，**强烈推荐开启**。
-- 就我测试而言，同样配置 `youtube 4K 60fps` 下，未开启 `bbr` 速度为 `20k Kbps`，开启 `bbr` 后为 `150k Kbps`，**速度相差极大**。
-- 直接使用一键安装脚本里的命令开启即可，选择 `bbrPlus版本`，即 `11-2-7` 。
+- 就个人测试而言，同样配置 `youtube 4K 60fps` 下，未开启 `bbr` 速度为 `20k Kbps`，开启 `bbr` 后为 `150k Kbps`，**速度相差极大**。
+- ~~直接使用一键安装脚本里的命令开启即可，选择 `bbrPlus版本`，即 `11-2-7`~~ (2020.08.08更新)一键脚本的`bbr安装启动`命令已经失效，请使用下方新命令。
 
 ### 名词解释
 
 **一键安装脚本**
 
-一键安装 `v2ray+ws+tls+nginx+https证书+https证书定时续签+bbr` ，`bbr` 需单独手动启动。
+一键安装 `v2ray+ws+tls+nginx+https证书+https证书定时续签`。
 
 ```bash
 bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log
@@ -85,13 +85,23 @@ bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_o
 
 一种加密协议，需要使用域名。一般配合 `ws` 使用。
 
-**nginx**
+**nginx**(非必须)
 
 服务器配置 `web网站` 使用，配置一个 `.html` 文件 `伪装成静态网站`。
 
-**https证书**
+**https证书**(非必须)
 
 给伪装的 `web` 网站添加证书，让网站更真实。证书有效期3个月，`一键安装脚本` 会自动 `申请，下载证书`，并添加 `证书自动续签任务`，**但是，需要自己修改nginx配置，选择证书路径！！**
+
+**bbr一键安装脚本**
+
+```bash
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
+chmod +x tcp.sh
+./tcp.sh
+```
+
+
 
 ### 具体搭建流程
 
@@ -135,7 +145,7 @@ bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_o
 
 - 按要求输入域名，等待脚本执行完成即可。
 
-#### 修改nginx配置文件
+#### 修改nginx配置文件(非必须)
 
 **添加 `nginx` 命令到环境变量**
 
@@ -319,11 +329,14 @@ rm *.conf
 
 **校验并重新启动nginx**
 
-校验：`nginx -t`
+- 校验：`nginx -t`
 
-重新启动：`nginx -s reload`
 
-查看nginx是否启动：`ps -ef | grep nginx`，看是否有 `master` 的行
+- 重新启动：`nginx -s reload`
+
+
+- 查看nginx是否启动：`ps -ef | grep nginx`，看是否有 `master` 的行
+
 
 如果校验报错，根据错误提示，修改配置文件。
 
@@ -333,31 +346,97 @@ rm *.conf
 
 #### 安装bbr加速
 
-重新执行一键安装脚本
+**安装bbr**
+
+执行bbr一键安装脚本
 
 ```bash
-bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
+chmod +x tcp.sh
+./tcp.sh
 ```
 
-依次选择11-2-7，即安装 `bbrPlus`
+依次执行`2-7`，即`安装bbrPlus`，`使用bbrPlus加速`
 
-期间会重启一次。
+安装之后使用`./tcp.sh`即可重复执行命令
+
+~~期间会重启一次。~~
 
 经测试，发现 `bbrPlus` 比 `bbr` 加速效果更好。
+
+**检查bbr是否安装成功**
+
+- 验证当前`TCP`的控制算法(**是否安装`bbr`**)：
+
+  ```bash
+  sysctl net.ipv4.tcp_available_congestion_control
+  ```
+
+  返回值一般为：
+
+  ```bash
+  net.ipv4.tcp_available_congestion_control = bbr cubic reno
+  // 或者
+  net.ipv4.tcp_available_congestion_control = reno cubic bbr
+  ```
+
+- 验证`BBR`是否已经启动(**是否启动`bbr`**)：
+
+  ```bash
+  sysctl net.ipv4.tcp_congestion_control
+  ```
+
+  返回值一般为：
+
+  ```bash
+  net.ipv4.tcp_congestion_control = bbr
+  ```
+
+- 或者：
+
+  ```bash
+  lsmod | grep bbr
+  ```
+
+  返回值一般为：
+
+  ```bash
+  // 返回值有tcp_bbrplus 即说明bbr已经启动。
+  // PS：但不是所有vps都会有此返回值，没有也正常。
+  tcp_bbrplus            20480  21
+  ```
+
+- **注意：** `bbrPlus` 有时候会自动失效(比如重启服务器后？)，此时需手动再次开启`bbrPlus`
 
 #### 其他问题
 
 **如果要更换域名，发现域名证书没有一起更新怎么办？**
 
-删掉证书文件，重新执行一键安装脚本，选择重新安装 `ws+tls+nginx`
+~~删掉证书文件，重新执行一键安装脚本，选择重新安装 `ws+tls+nginx`~~
 
 ```bash
+// 作废！作废！作废！
 cd /data/
 rm v2ray.crt
 rm v2ray.key
 bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log
 1
 ```
+
+一键安装脚本已更新并添加**删除证书遗留文件**功能，执行一键安装脚本，选择`16`即可
+
+```bash
+bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log
+16
+```
+
+**如何重启服务器**
+
+```bash
+reboot
+```
+
+
 
 ### 效果
 
