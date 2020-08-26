@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vue-i18n：vue下的一种多语言方案]]></title>
+    <url>%2F2020%2F08%2F26%2Fvue-i18n%2F</url>
+    <content type="text"><![CDATA[vue-i18n 是 vue 下的一个插件，用于让项目支持国际化多语言。安装1npm install vue-i18n --save引入vue-i18n将 vue-i18n 注入到vue中。注入后在任何 vue组件 (.vue结尾的文件)内，都可以使用 this.$t(&#39;xxxx&#39;) 来调用。新建 VueI18n 实例。新建默认语言。新建待翻译语言(json文件)。新建 VueI18n 实例时导入上面文件。新建 Vue 实例时引入 VueI18n 实例。1234567891011121314151617181920212223242526272829// ./i18n/index.jsimport Vue from 'vue'import VueI18n form 'vue-i18n'import 'en' from './i18n/locales/en.json'import 'zh' from './i18n/locales/zh.json'Vue.use(VueI18n)const DEFAULT_LANG = 'zh'const messages = &#123; en, zh&#125;const i18n = new VueI18n(&#123; locale: DEFAULT_LANG, messages: messages&#125;)export default i18n----------------------------// main.jsimport Vue from 'vue'import i18n from './i18n'new Vue(&#123; i18n&#125;).$mount('#app')使用官方文档有详情的介绍，本文只介绍常用的几种使用方法。json编写使用 {} 设置变量使用 @xx:yy:zz 引用 json 中已存在的变量12345678&#123; en: &#123; hello: 'hello &#123; name &#125;, nice to meet you ~', &#125;, en1: &#123; alsoHello: '@:en.hello' // 和en.hello一样，也要传入变量 &#123; name:xx &#125; &#125;&#125;使用场景vue实例中：1&lt;span&gt;&#123;&#123;$t('en.hello')&#125;&#125;&lt;/span&gt;12345// vue中的 &lt;script&gt;内hello () &#123; let hello = this.$t('en.hello') console.log(hello)&#125;非vue 实例中(比如js文件)：12345678// 注意没有$符号// ./demo.jsimport i18n from './i18n'hello () &#123; let hello = i18n.t('en.hello') console.log(hello)&#125;使用方式常规翻译直接使用即可。123456789// en.json&#123; en: &#123; hello: 'hello world' &#125;&#125;// hello.vuelet hello = this.$t('hello')带变量的翻译使用 {} 设置变量。使用 Object、Array 等传入变量。123456789101112131415161718192021// ---------- 对象// en.json&#123; en: &#123; hello: 'hello &#123; name &#125;, nice to meet you ~' &#125;&#125;// hello.vuelet hello = this.$t('en.hello', &#123; name: 'Jack' &#125;)// ---------- 数组// en.json&#123; en: &#123; hello: 'hello &#123; 0 &#125;, nice to meet &#123; 1 &#125; ~' &#125;&#125;// hello.vuelet hello = this.$t('en.hello', ['Jack', 'you'])优化调用方式我们发现，在 vue 组件中是通过 this.$t(&#39;xxx&#39;) 来调用，在 非vue 组件中是通过引入 i18n ，然后 i18n.t(&#39;xxx&#39;) 来调用。那每次调用的时候，我们得区分是否是 vue 组件， 然后重复、多次引入 i18n 。这明显增加了代码的复杂性。有个直接的解决方法就是，把 i18n 挂载到全局的 windows 下，之后在任何地方都可以通过 i18n.t() 来调用了。12345678910111213141516171819202122232425262728293031// ./i18n/index.jsimport Vue from 'vue'import VueI18n form 'vue-i18n'import 'en' from './i18n/locales/en.json'import 'zh' from './i18n/locales/zh.json'Vue.use(VueI18n)const DEFAULT_LANG = 'zh'const messages = &#123; en, zh&#125;const i18n = new VueI18n(&#123; locale: DEFAULT_LANG, messages: messages&#125;)window.i18n = i18n // +++++export default i18n----------------------------// main.jsimport Vue from 'vue'import i18n from './i18n'// 其他 import 文件 +++++new Vue(&#123; i18n&#125;).$mount('#app')添加修改语言方法我们在 i18n 里添加一个修改语言的方法。该函数做了以下3件事情。将当前语言保存到 localStorage 中；给 body 添加语种相关的 class，优化样式时使用。将当前语种存到 Vue 的全局配置中，以便未来使用。1234567891011121314151617181920212223242526272829303132333435363738394041// ./i18n/index.jsimport Vue from 'vue'import VueI18n form 'vue-i18n'import 'en' from './i18n/locales/en.json'import 'zh' from './i18n/locales/zh.json'Vue.use(VueI18n)const DEFAULT_LANG = 'zh'const messages = &#123; en, zh&#125;const i18n = new VueI18n(&#123; locale: DEFAULT_LANG, messages: messages&#125;)// 修改语言的函数export const setup = lang =&gt; &#123; if (!lang) &#123; lang = window.localStorage.getItem(LOCALE_KEY) if (!messages[lang]) &#123; lang = DEFAULT_LANG &#125; &#125; window.localStorage.setItem(LOCALE_KEY, lang) Object.keys(messages).forEach(lang =&gt; &#123; document.body.classList.remove(`lang-$&#123;lang&#125;`) &#125;) document.body.classList.add(`lang-$&#123;lang&#125;`) document.body.setAttribute('lang', lang) Vue.config.lang = lang i18n.locale = lang&#125;window.i18n = i18n export default i18n热加载(待验证)12345678910// main.jsif (module.hot) &#123; module.hot.accept(['./i18n/locales/en', './i18n/locales/zh'], function () &#123; i18n.setLocaleMessage('en', require('./i18n/locales/en').default) i18n.setLocaleMessage('zh', require('./i18n/locales/zh').default) // 同样可以通过 $i18n 属性进行热更新 // app.$i18n.setLocaleMessage('en', require('./i18n/locales/en').default) // app.$i18n.setLocaleMessage('ja', require('../i18n/locales/zh').default) &#125;)&#125;]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>vue</tag>
+        <tag>多语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Vue Router]]></title>
     <url>%2F2020%2F06%2F29%2Fvue-router%2F</url>
     <content type="text"><![CDATA[断断续续看了好多遍 Vue Router 的官方文档，终于下定决心来写一篇笔记了…..OK，开始正题完整介绍的话内容太多，本文主要介绍工作中较常用到的几个知识点router/routerouterVue Router 对象，包含了 Vue Router 的一些属性和方法Vue Router 属性router.app: 配置了 router 的Vue根实例。router.mode: 路由使用的模式。router.currentRoute: 当前激活的路由实例，同 this.$route。Vue Router 方法router.beforeEach: 全局前置守卫，必须调用 next() 方法。router.beforeResolve: 全局解析守卫，必须调用 next() 方法。router.afterEach: 全局后置钩子，无 next() 方法。router.push: 打开一个新路由/页面，会在浏览器添加历史记录。router.replace: 打开/替换为一个新路由/页面，不会在浏览器添加历史记录。router.go: 前进 n 个页面，n 可为负数。router.back: 等同于 router.go(-1)。router.forward: 等同于 router.go(1)。router.getMatchedComponents: 返回目标位置或是当前路由匹配的组件数组(是组件的定义/构造类，不是实例)，一般用于服务端渲染的数据预加载使用。router.resolve: 解析目标位置。router.addRoutes: 动态添加更多的路由规则。router.onReady: 把一个回调排队。router.onError: 注册一个回调，该回调在路由导航过程中出错时被调用。route当前激活的路由实例，所有属性只读$route.path: 当前路由的绝对路径。$route.params: 当前路由上 key/value对象 参数。$route.query: 当前对象的 URL 上的 key/value对象 参数，会显示在浏览器地址栏上。$route.hash: 当前路由的 hash 值(带 #)。$route.fullPath: 完成解析后的 URL，包含查询参数和 hash 的完整路径。$route.matched: 一个匹配路由的数组。从根路由开始到当前所在路由的所有嵌套路径片段组成的数组。$route.name: 当前路由的 name。$route.redirectedFrom: 重定向来源的路由的名字。组件注入通过在 Vue 根实例的 router 配置传入 router 实例，下面这些属性成员会被注入到每个子组件。this.$router : router 实例。this.$route : 当前激活的路由实例，所有属性只读。导航守卫全局导航守卫beforeEach: 全局前置守卫，导航前，一定要调用 next() 来 resolve 这个钩子。beforeResolve: 全局解析守卫，导航前，和 beforeEach 类似，区别是导航在确认前，同时在所有组件内守卫和异步路由组件解析之后，解析守卫才会被调用。afterEach: 全局后置钩子，导航后，无 next() 方法也不会改变导航本身(可添加页面定位等功能)。路由独享的守卫beforeEnter: 路由独享守卫，配置在路由上的守卫，该路由及其子路由都会共享该守卫。组件内守卫beforeRouteEnter: 渲染该组件对应的路由被 confirm 前调用，不能获取 this，但可通过传回调(唯一一个可以传回调给 next 的守卫)给 next() 来访问组件实例。12345beforeRouteEnter (to, from, next) =&gt; &#123; next(vm =&gt; &#123; // 通过 `vm` 访问组件实例 &#125;)&#125;beforeRouteUpdate: 路由改变，但是该组件被复用时调用。beforeRouteLeave: 导航离开该组件的对应路由时调用。123456789101112131415161718const Foo = &#123; template: `...`, beforeRouteEnter (to, from, next) &#123; // 在渲染该组件的对应路由被 confirm 前调用 // 不！能！获取组件实例 `this` // 因为当守卫执行前，组件实例还没被创建 &#125;, beforeRouteUpdate (to, from, next) &#123; // 在当前路由改变，但是该组件被复用时调用 // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候， // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。 // 可以访问组件实例 `this` &#125;, beforeRouteLeave (to, from, next) &#123; // 导航离开该组件的对应路由时调用 // 可以访问组件实例 `this` &#125;&#125;完整的导航解析流程导航被触发。在失活的组件里调用 beforeRouteLeave 守卫。调用全局的 beforeEach 守卫。在重用的组件里调用 beforeRouteUpdate 守卫（2.2+）。在路由配置里调用 beforeEnter 。解析异步路由组件。在被激活的组件里调用 beforeRouteEnter 。调用全局的 beforeResolve 守卫（2.5+）。导航被确认。调用全局的 afterEach 钩子。触发 DOM 更新。用创建好的实例调用 beforeRouteEnter 守卫传递给 next 的回调函数。其他falsy/falsey(虚值)在 Boolean 上下文中认定为 false 的值。Javascript 在需要用到 Boolean 类型的值的上下文中使用强制类型转换将值转换为 Boolean 值，比如条件语句和循环中。目前 Js 中只有7个 falsy 值：false、0、0n、&quot;&quot;/&#39;&#39;/、``、 null、undefined、NaN滚动行为scrollBehavior(to, from, savedPosition): 添加在路由实例 new Router({}) 中，用于自定义切换时页面如何滚动。该功能只在支持 history.pushState 的浏览器中可用。keep-alive 中无效，因为 keep-alive 已自动保留了之前的状态。返回滚动的位置信息：{ x: number, y: number } : 具体位置。{ selector: string, offset? : { x: number, y: number }} : 锚点+偏移量更多参考]]></content>
@@ -31,8 +44,8 @@
         <category>一起哈啤</category>
       </categories>
       <tags>
-        <tag>v2ray</tag>
         <tag>vpn</tag>
+        <tag>v2ray</tag>
         <tag>科学上网</tag>
       </tags>
   </entry>
@@ -44,8 +57,8 @@
         <category>一起哈啤</category>
       </categories>
       <tags>
-        <tag>vpn</tag>
         <tag>ss</tag>
+        <tag>vpn</tag>
       </tags>
   </entry>
   <entry>
@@ -231,8 +244,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>web前端</tag>
         <tag>hexo</tag>
+        <tag>web前端</tag>
       </tags>
   </entry>
   <entry>
