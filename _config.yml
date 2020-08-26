@@ -88,7 +88,7 @@ theme: sagiri
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:jian2333/jianwill.github.io.git
+  repo: git@github.com:jian2333/jian2333.github.io.git
   branch: master
   message:
   name: Jianmbp
