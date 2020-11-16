@@ -15,7 +15,7 @@
   <entry>
     <title><![CDATA[伪元素的妙用]]></title>
     <url>%2F2020%2F11%2F16%2Fpseudo-element%2F</url>
-    <content type="text"><![CDATA[最近ui优化做的比较多，样式写久了，越来越觉得 伪元素 是真的好用，善用 伪元素 能极大的提高效率。下面总结下几种常用的伪元素用法：三角形业务场景下的一些样式垂直居中用法三角形在 css 中，border边框 是由上下左右四个三角形组成的，所以，设置 border 边框为 transparent ，再设置要显示的 border 颜色， 即可以显示出三角形。通过设置不同的 border 和 border-left 宽度，可以生成不同效果的三角形添加 border-radius ， 可以让 三角形变成扇形Demo相关代码123456&lt;div class="pseudo"&gt; &lt;div class="triangle1"&gt;&lt;/div&gt; &lt;div class="triangle2"&gt;&lt;/div&gt; &lt;div class="triangle3"&gt;&lt;/div&gt; &lt;div class="triangle4"&gt;&lt;/div&gt;&lt;/div&gt;123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566.pseudo &#123; position: relative; top: 10px; width: 100%; height: 150px; border: 1px solid red; display: grid; grid-template-columns: repeat(auto-fill, 120px); justify-items: center; align-items: center; .triangle1 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: ''; border-top: 40px solid green; border-right: 40px solid orange; border-left: 40px solid red; border-bottom: 40px solid blue; position: absolute; top: 10px; left: 10px; &#125; &#125; .triangle2 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: ''; border: 40px solid transparent; border-left: 40px solid red; position: absolute; top: 10px; left: 10px; &#125; &#125; .triangle3 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: '' border: 40px solid transparent; border-left: 80px solid red; position: absolute; top: 10px; left: 10px; &#125; &#125; .triangle4 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: ''; border: 40px solid transparent; border-left: 40px solid red; border-radius: 50%; position: absolute; top: 10px; left: 10px; &#125; &#125;&#125;业务场景最近的项目中，有个需求是自适应的情况下，显示5列图标，每列之间用箭头连接。单独的图标自适应好做，flex 、 grid 布局都可以实现，但是图标间的 连接箭头 就不好做了，因为2个图标之间的距离，是不固定的….但是！如果用伪元素，这个问题就很容易解决了～Tips:1个 元素 只能有1个 伪元素 ，如果要使用多个 伪元素 ，就得用多个 元素divarrows-before.width 宽度多 10px ，是为了能和 arrows-after 重叠，视觉看起来虚线不断裂Demo相关代码1234567891011121314&lt;div class=&quot;home-menu&quot;&gt; &lt;div :class=&quot;[&#123;&apos;arrows-after&apos;: arrowsAfter&#125;, &#123;&apos;arrows-before&apos;: arrowsBefore&#125;]&quot;&gt;&lt;/div&gt; &lt;div :class=&quot;&#123;&apos;arrows&apos;: arrowsBefore&#125;&quot;&gt;&lt;/div&gt; &lt;div class=&quot;title&quot; @click=&quot;clickIcon&quot;&gt; &lt;div class=&quot;bg&quot; :style=&quot;bgStyles&quot;&gt;&lt;/div&gt; &lt;span class=&quot;sp&quot;&gt;&#123;&#123;title&#125;&#125;&lt;/span&gt; &lt;/div&gt; &lt;div class=&quot;body&quot;&gt; &lt;div v-for=&quot;(item, index) in values&quot; :key=&quot;index&quot; :class=&quot;bodyClass&quot; :style=&quot;bodyStyle&quot;&gt; &lt;p class=&quot;value&quot;&gt;&#123;&#123;item.value&#125;&#125;&lt;/p&gt; &lt;p class=&quot;name&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;/p&gt; &lt;/div&gt; &lt;/div&gt;&lt;/div12345678910111213141516171819202122232425262728293031323334353637383940@arrows-border: #E6E6E6;@arrows-margin: 24px;@arrows-width: 8px;@bg-r: 60px;.arrows(@arrows-margin) &#123; .arrows-before:before &#123; content: ''; width: calc(~'50% - @&#123;bg-r&#125; / 2 - @&#123;arrows-margin&#125; - @&#123;arrows-width&#125; + 10px'); height: 0; border: 1px dashed @arrows-border; position: absolute; left: -10px; top: 30px; &#125; .arrows:after &#123; content: ''; width: 0; height: 0; border: @arrows-width / 2 solid transparent; border-left: @arrows-width solid @arrows-border; position: absolute; left: calc(~'50% - @&#123;bg-r&#125; / 2 - @&#123;arrows-margin&#125; - @&#123;arrows-width&#125;'); top: 27px; &#125; .arrows-after:after &#123; content: ''; width: calc(~'50% - @&#123;bg-r&#125; / 2 - @&#123;arrows-margin&#125; + @&#123;arrows-width&#125;'); height: 0; border: 1px dashed @arrows-border; position: absolute; right: -@arrows-width; top: 30px; &#125;&#125;.arrows(@arrows-margin);@media only screen and (max-width: 1600px) &#123; @arrows-margin: 12px; .arrows(@arrows-margin);&#125;垂直居中参考之前写的一篇文章，利用 父元素 的 伪元素 ，可以实现垂直居中相关代码12345&lt;div class="parent"&gt; &lt;div class="centered"&gt; 我是居中文字 &lt;/div&gt;&lt;/div&gt;1234567891011121314151617181920.parent &#123; width: 400px; height: 300px; border: 1px soild pink;&#125;.centered: &#123; width: 100px; height: 60px; border: 1px solid green; display: inline-block; vertical-align: middle;&#125;.parent::before &#123; content: ''; width: 0; height: 100%; background: #ccc; display: inline-block; vertical-align: middle;&#125;总结伪元素的用法还有很多，目前常用的暂时就这些，其他用法等用的多后再记录下来吧～]]></content>
+    <content type="text"><![CDATA[最近ui优化做的比较多，样式写久了，越来越觉得 伪元素 是真的好用，善用 伪元素 能极大的提高效率。下面总结下几种常用的伪元素用法：三角形业务场景下的一些样式垂直居中用法三角形在 css 中，border边框 是由上下左右四个三角形组成的，所以，设置 border 边框为 transparent ，再设置要显示的 border 颜色， 即可以显示出三角形。通过设置不同的 border 和 border-left 宽度，可以生成不同效果的三角形添加 border-radius ， 可以让 三角形变成扇形Demo相关代码123456&lt;div class="pseudo"&gt; &lt;div class="triangle1"&gt;&lt;/div&gt; &lt;div class="triangle2"&gt;&lt;/div&gt; &lt;div class="triangle3"&gt;&lt;/div&gt; &lt;div class="triangle4"&gt;&lt;/div&gt;&lt;/div&gt;123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566.pseudo &#123; position: relative; top: 10px; width: 100%; height: 150px; border: 1px solid red; display: grid; grid-template-columns: repeat(auto-fill, 120px); justify-items: center; align-items: center; .triangle1 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: ''; border-top: 40px solid green; border-right: 40px solid orange; border-left: 40px solid red; border-bottom: 40px solid blue; position: absolute; top: 10px; left: 10px; &#125; &#125; .triangle2 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: ''; border: 40px solid transparent; border-left: 40px solid red; position: absolute; top: 10px; left: 10px; &#125; &#125; .triangle3 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: '' border: 40px solid transparent; border-left: 80px solid red; position: absolute; top: 10px; left: 10px; &#125; &#125; .triangle4 &#123; position: relative; width: 100px; height: 100px; &amp;:after &#123; content: ''; border: 40px solid transparent; border-left: 40px solid red; border-radius: 50%; position: absolute; top: 10px; left: 10px; &#125; &#125;&#125;业务场景最近的项目中，有个需求是自适应的情况下，显示5列图标，每列之间用箭头连接。单独的图标自适应好做，flex 、 grid 布局都可以实现，但是图标间的 连接箭头 就不好做了，因为2个图标之间的距离，是不固定的….但是！如果用伪元素，这个问题就很容易解决了～Tips:1个 元素 只能有1个 伪元素 ，如果要使用多个 伪元素 ，就得用多个 元素divarrows-before.width 宽度多 10px ，是为了能和 arrows-after 重叠，视觉看起来虚线不断裂Demo相关代码1234567891011121314&lt;div class="home-menu"&gt; &lt;div :class="[&#123;'arrows-after': arrowsAfter&#125;, &#123;'arrows-before': arrowsBefore&#125;]"&gt;&lt;/div&gt; &lt;div :class="&#123;'arrows': arrowsBefore&#125;"&gt;&lt;/div&gt; &lt;div class="title" @click="clickIcon"&gt; &lt;div class="bg" :style="bgStyles"&gt;&lt;/div&gt; &lt;span class="sp"&gt;&#123;&#123;title&#125;&#125;&lt;/span&gt; &lt;/div&gt; &lt;div class="body"&gt; &lt;div v-for="(item, index) in values" :key="index" :class="bodyClass" :style="bodyStyle"&gt; &lt;p class="value"&gt;&#123;&#123;item.value&#125;&#125;&lt;/p&gt; &lt;p class="name"&gt;&#123;&#123;item.name&#125;&#125;&lt;/p&gt; &lt;/div&gt; &lt;/div&gt;&lt;/div12345678910111213141516171819202122232425262728293031323334353637383940@arrows-border: #E6E6E6;@arrows-margin: 24px;@arrows-width: 8px;@bg-r: 60px;.arrows(@arrows-margin) &#123; .arrows-before:before &#123; content: ''; width: calc(~'50% - @&#123;bg-r&#125; / 2 - @&#123;arrows-margin&#125; - @&#123;arrows-width&#125; + 10px'); height: 0; border: 1px dashed @arrows-border; position: absolute; left: -10px; top: 30px; &#125; .arrows:after &#123; content: ''; width: 0; height: 0; border: @arrows-width / 2 solid transparent; border-left: @arrows-width solid @arrows-border; position: absolute; left: calc(~'50% - @&#123;bg-r&#125; / 2 - @&#123;arrows-margin&#125; - @&#123;arrows-width&#125;'); top: 27px; &#125; .arrows-after:after &#123; content: ''; width: calc(~'50% - @&#123;bg-r&#125; / 2 - @&#123;arrows-margin&#125; + @&#123;arrows-width&#125;'); height: 0; border: 1px dashed @arrows-border; position: absolute; right: -@arrows-width; top: 30px; &#125;&#125;.arrows(@arrows-margin);@media only screen and (max-width: 1600px) &#123; @arrows-margin: 12px; .arrows(@arrows-margin);&#125;垂直居中参考之前写的一篇文章，利用 父元素 的 伪元素 ，可以实现垂直居中相关代码12345&lt;div class="parent"&gt; &lt;div class="centered"&gt; 我是居中文字 &lt;/div&gt;&lt;/div&gt;1234567891011121314151617181920.parent &#123; width: 400px; height: 300px; border: 1px soild pink;&#125;.centered: &#123; width: 100px; height: 60px; border: 1px solid green; display: inline-block; vertical-align: middle;&#125;.parent::before &#123; content: ''; width: 0; height: 100%; background: #ccc; display: inline-block; vertical-align: middle;&#125;总结伪元素的用法还有很多，目前常用的暂时就这些，其他用法等用的多后再记录下来吧～]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
@@ -33,8 +33,8 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>typescript</tag>
         <tag>vue</tag>
+        <tag>typescript</tag>
       </tags>
   </entry>
   <entry>
@@ -81,8 +81,8 @@
         <category>一起哈啤</category>
       </categories>
       <tags>
-        <tag>v2ray</tag>
         <tag>vpn</tag>
+        <tag>v2ray</tag>
         <tag>科学上网</tag>
       </tags>
   </entry>
@@ -94,8 +94,8 @@
         <category>一起哈啤</category>
       </categories>
       <tags>
-        <tag>vpn</tag>
         <tag>ss</tag>
+        <tag>vpn</tag>
       </tags>
   </entry>
   <entry>
@@ -106,8 +106,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>web前端</tag>
         <tag>后端</tag>
+        <tag>web前端</tag>
         <tag>正则表达式</tag>
       </tags>
   </entry>
@@ -134,8 +134,8 @@
         <tag>web前端</tag>
         <tag>git</tag>
         <tag>vue</tag>
-        <tag>webpack</tag>
         <tag>iview</tag>
+        <tag>webpack</tag>
         <tag>echarts</tag>
       </tags>
   </entry>
@@ -160,8 +160,8 @@
       <tags>
         <tag>web前端</tag>
         <tag>css</tag>
-        <tag>js</tag>
         <tag>性能优化</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -185,8 +185,8 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>js</tag>
         <tag>webpack</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -281,8 +281,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>web前端</tag>
         <tag>hexo</tag>
+        <tag>web前端</tag>
       </tags>
   </entry>
   <entry>
