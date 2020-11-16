@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jian2333.github.io/2020/11/16/animation/</loc>
+    
+    <lastmod>2020-11-16T08:11:40.156Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jian2333.github.io/2020/11/16/pseudo-element/</loc>
+    
+    <lastmod>2020-11-16T06:02:16.830Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jian2333.github.io/2020/09/02/ts-in-vue-1/</loc>
     
     <lastmod>2020-09-02T10:21:36.559Z</lastmod>
