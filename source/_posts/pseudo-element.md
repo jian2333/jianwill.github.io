@@ -132,7 +132,7 @@ tags:
 
 **相关代码**
 
-```vue
+```html
 <div class="home-menu">
   <div :class="[{'arrows-after': arrowsAfter}, {'arrows-before': arrowsBefore}]"></div>
   <div :class="{'arrows': arrowsBefore}"></div>
