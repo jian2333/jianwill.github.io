@@ -1,0 +1,344 @@
+<!DOCTYPE html><html class="theme-next pisces" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="//fonts.loli.net/css?family=Sigmar One:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css"><link href="/css/main.css?v=0.0.42" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/header/avatar-2.jpg?v=0.0.42"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=0.0.42"><link rel="mask-icon" href="/images/header/avatar-2.jpg?v=0.0.42" color="#222"><meta name="keywords" content="v2ray,vpn,科学上网,"><meta name="description" content="你问我(一)在哪里？其实并没有写，因为我懒。。。。。(小声bb)那么(一)是什么呢，简单来说就是加了个软路由 r2s，用 主路由 的模式实现了路由翻墙～升级之旅(一)痛点每个设备出国留学都要开相应的软件：Windows -&amp;gt; v2rayN，Mac -&amp;gt; v2rayU，ios -&amp;gt; shadowRocketPC上代理游戏流量还得单独开 proxifier 软件，参考之前写的一片文章"><meta name="keywords" content="v2ray,vpn,科学上网"><meta property="og:type" content="article"><meta property="og:title" content="家庭网络的升级之旅(二)"><meta property="og:url" content="http://jian2333.github.io/2021/01/19/home-net-2/index.html"><meta property="og:site_name" content="Hi,Jianww"><meta property="og:description" content="你问我(一)在哪里？其实并没有写，因为我懒。。。。。(小声bb)那么(一)是什么呢，简单来说就是加了个软路由 r2s，用 主路由 的模式实现了路由翻墙～升级之旅(一)痛点每个设备出国留学都要开相应的软件：Windows -&amp;gt; v2rayN，Mac -&amp;gt; v2rayU，ios -&amp;gt; shadowRocketPC上代理游戏流量还得单独开 proxifier 软件，参考之前写的一片文章"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://image.jianwill.cn/uPic/85Klmu_20210120155351.png"><meta property="og:image" content="http://image.jianwill.cn/uPic/8txA7M_20210120171154.png"><meta property="og:image" content="http://image.jianwill.cn/uPic/1_20210120180506.jpeg"><meta property="og:image" content="http://image.jianwill.cn/uPic/2_20210120180713.jpeg"><meta property="og:image" content="http://image.jianwill.cn/uPic/3_20210120180712.jpeg"><meta property="og:image" content="http://image.jianwill.cn/uPic/4_20210120180713.jpeg"><meta property="og:image" content="http://image.jianwill.cn/uPic/splatoon_1_20210121095537.jpg"><meta property="og:updated_time" content="2021-01-21T02:01:34.300Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="家庭网络的升级之旅(二)"><meta name="twitter:description" content="你问我(一)在哪里？其实并没有写，因为我懒。。。。。(小声bb)那么(一)是什么呢，简单来说就是加了个软路由 r2s，用 主路由 的模式实现了路由翻墙～升级之旅(一)痛点每个设备出国留学都要开相应的软件：Windows -&amp;gt; v2rayN，Mac -&amp;gt; v2rayU，ios -&amp;gt; shadowRocketPC上代理游戏流量还得单独开 proxifier 软件，参考之前写的一片文章"><meta name="twitter:image" content="http://image.jianwill.cn/uPic/85Klmu_20210120155351.png"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"0.0.42",sidebar:{position:"right",display:"always",offset:52,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,tabs:!0,motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},since:"7/7/2017 11:30:00",onlineAPI:"",site:{title:"Hi,Jianww",subtitle:"",author:"Jianww"},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},leancloud:{enable:!0,appID:"qo8CRfEEmihHu03bD3HWUTFa-gzGzoHsz",appKey:"WTiuQmcTAY1pN7pr7nMuIIkK"},favicon:{visibilitychange:!0,narmal:"/images/favicon.ico",hidden:"/images/failure.ico",show_text:"(/≧▽≦/)咦！又好了！",hide_text:"(●—●)喔哟，崩溃啦！"}}</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script><title>家庭网络的升级之旅(二) | Hi,Jianww</title><script>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-140893760-1","auto"),ga("send","pageview")</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling"><div class="container sidebar-position-right page-post-detail"><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-rocket"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li><li class="menu-item search"><form class="search-form"><input name="keyword" type="text" class="search-input" placeholder="站内搜索"> <button type="submit" class="search-submit"><i class="fa fa-search"></i></button></form></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav><div class="site-brand-wrapper" style="background-image:url(/images/header/bg-1.jpg)"><div class="site-meta"><div class="custom-logo-site-title"><div class="brand"><span class="logo-line-before"><i></i></span><div class="site-title"><div id="animate" class="animate"><span>H</span><span>i</span><span>,</span><span>J</span><span>i</span><span>a</span><span>n</span><span>w</span><span>w</span></div><div id="guide" class="guide"><span>H</span><span>i</span><span>,</span><span>J</span><span>i</span><span>a</span><span>n</span><span>w</span><span>w</span></div></div><span class="logo-line-after"><i></i></span></div></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-master-avatar" itemprop="image" src="/images/header/avatar-2.jpg" alt="Jianww"><h2 class="site-master-description" itemprop="description"><span>Coding一时爽，</span><span>一直Coding一直爽！</span></h2></div></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-date"><div class="post-month">01月</div><div class="post-day">19</div></div><div class="post-badge"><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/一起哈啤/" itemprop="url" rel="index"><span itemprop="name">一起哈啤</span></a></span></div><div class="post-block"><link itemprop="mainEntityOfPage" href="http://jian2333.github.io/2021/01/19/home-net-2/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Jianww"><meta itemprop="description" content><meta itemprop="image" content="/images/header/avatar-2.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Hi,Jianww"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">家庭网络的升级之旅(二)</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-19T13:54:59+08:00">2021-01-19</time> </span><span class="post-wordcount"><span class="post-meta-divider">•</span> <span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i> </span><span class="post-meta-item-text">字数统计</span> <span title="字数统计">1334</span> </span><span id="/2021/01/19/home-net-2/" class="leancloud_visitors" data-flag-title="家庭网络的升级之旅(二)"><span class="post-meta-divider">•</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">阅读次数</span> <span class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><p>你问我(一)在哪里？其实并没有写，因为我懒。。。。。(小声bb)</p><p>那么(一)是什么呢，简单来说就是加了个软路由 <code>r2s</code>，用 <code>主路由</code> 的模式实现了路由翻墙～</p><h3 id="升级之旅-一"><a href="#升级之旅-一" class="headerlink" title="升级之旅(一)"></a>升级之旅(一)</h3><h4 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h4><ul><li>每个设备出国留学都要开相应的软件：<code>Windows</code> -&gt; <code>v2rayN</code>，<code>Mac</code> -&gt; <code>v2rayU</code>，<code>ios</code> -&gt; <code>shadowRocket</code></li><li>PC上代理游戏流量还得单独开 <code>proxifier</code> 软件，参考之前写的一片文章 <a href="https://jian2333.github.io/2019/09/10/sstovpn/">ss + proxifier 实现vpn游戏代理</a></li><li><code>switch</code> 联网得通过共享 <code>wifi</code> 的方式，一直开着 <code>PC</code> 或者 <code>iphone</code></li></ul><p>种种的不便大大降低了用户体验，尤其是玩 <code>switch</code> 的时候，每次都要特意开 <code>PC</code> 或 <code>iphone</code> 挂着，实在是不方便了～</p><p>那么，有什么方法能一起解决上面的问题呢？</p><a id="more"></a><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>答案，当然是有的，<strong>路由翻墙</strong>就是很好的一种方案！</p><ul><li>路由器翻墙后，连接路由器的所有设备(有线/无线)都会根据<strong>流量规则</strong>自行决定是否翻墙</li><li>在 <code>路由翻墙插件</code> 里，设置 <code>协议规则</code>：<ul><li><code>TCP</code>: 使用 <code>v2ray</code> 协议，上网速度快；</li><li><code>UDP</code>: 使用 <code>ss</code> 协议，玩游戏稳定(上网速度慢)</li></ul></li></ul><p><strong>Tips</strong>：之所以 <code>UDP</code> 使用 <code>ss</code> 而不使用 <code>v2ray</code>，因为 <code>v2ray</code> 不适合作为<strong>游戏的流量协议</strong>，<code>v2ray</code> 进行了多次流量转换，网络类型很差，比如在 <code>switch</code> 里：</p><ul><li><code>UDP</code> 使用 <code>ss</code> 时：<code>NAT</code> 类型为<strong>A</strong>，网络质量最好</li><li><code>UDP</code> 使用 <code>v2ray</code> 时：<code>NAT</code> 类型为<strong>D</strong>，网络质量非常差，基本不能联机</li></ul><p>Ok，理论方案已经确定，接下来就是实践开始～</p><h5 id="硬路由尝试"><a href="#硬路由尝试" class="headerlink" title="硬路由尝试"></a>硬路由尝试</h5><p>最开始是直接尝试用硬路由刷 <code>梅林固件</code>、<code>老毛子固件</code> 等，但硬路由配置太低，刷了系统后跑不起来，最后决定<strong>直 接 上 软路由！！</strong></p><h5 id="软路由"><a href="#软路由" class="headerlink" title="软路由"></a>软路由</h5><p>软路由选择了入门级的 <code>r2s</code> ，因为性价比极高，只要200块就行，性能也够，而且体积非常小，很方便～</p><p>然后就是常规操作了，刷固件，配置 <code>passwall</code>，选择代理模式：</p><ul><li><code>TCP</code>: <code>v2ray</code> 协议，默认模式为 <code>中国大陆以外</code></li><li><code>UDP</code>: <code>ss</code> 协议，默认模式为 <code>游戏模式</code></li></ul><p>家庭网络采用 <code>主路由</code> 的连接方式：</p><ul><li><code>光猫</code> -&gt; <code>软路由</code> -&gt; <code>硬路由</code>(作为<strong>路由器</strong>) -&gt; <code>多个设备ABCDE</code></li><li><code>软路由</code> 中使用 <code>passwall</code> 插件进行<strong>路由翻墙</strong></li><li><code>硬路由</code> 中进行 <code>IP</code> 与 <code>MAC</code> 绑定，<code>wifi</code> 发射，<code>多个设备ABCDE</code> 的 <code>连接限制</code>、<code>网络限制</code>等功能</li></ul><p><img src="http://image.jianwill.cn/uPic/85Klmu_20210120155351.png" alt="家庭网络前" style="zoom:40%"></p><p>到此为止，之前的需求都满足了，完美！</p><h3 id="升级之旅-二"><a href="#升级之旅-二" class="headerlink" title="升级之旅(二)"></a>升级之旅(二)</h3><p>之后的时间一直都运行完美，直到入手了 <code>喷喷(喷射战士2)</code>….</p><h4 id="新的痛点"><a href="#新的痛点" class="headerlink" title="新的痛点"></a>新的痛点</h4><p>之前有说过，网页都走 <code>TCP</code> 的 <code>v2ray</code> 协议，网速快，游戏<strong>都</strong>走 <code>UDP</code> 的 <code>ss</code> 协议，网络稳定。</p><p>但是，<code>喷喷</code> 是个特例….. 这游戏会<strong>同时</strong>走 <code>TCP</code> 和 <code>UDP</code> 协议，而且对网络要求极高，<code>NAT</code> 必须是 <code>B</code> 以上。换句话说就是，玩 <code>喷喷</code> 的时候，<strong><code>TCP</code> 也要设置成 <code>ss</code> 协议</strong>。。。。</p><p>那么，新问题来了，玩 <code>喷喷</code> 的时候设置成 <code>ss</code> 协议，玩完后改回 <code>v2ray</code> 协议？</p><p>不行～～ 这样太麻烦了…..</p><p>所以…有方法能解决上面的问题吗？🤔️</p><h4 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h4><p>经过大量的查阅资料，发现了一种可行的方案：</p><ul><li><code>passwall</code> 里设置2个 <code>TCP</code> 协议，分别是 <code>TCP1</code> -&gt; <code>v2ray</code> 和 <code>TCP2</code> -&gt; <code>ss</code></li><li>默认设置为 <code>TCP1</code></li><li><strong>重点</strong>： 在 <code>访问控制</code> 里，通过 <code>IP</code> 或 <code>MAC</code> 匹配到 <code>switch</code>，然后设置为 <code>TCP2</code></li></ul><p>按理来说这样应该就可行了。但是，新的问题又出现了，当前 <code>主路由</code> 模式下，<code>软路由</code> 只能获取 <code>硬路由</code> 的 <code>IP</code> 和 <code>MAC</code>， 而 <code>设备ABCDE</code> 的 <code>IP</code> 和 <code>MAC</code> 又只能在 <code>硬路由</code> 中获取，而且 <code>软路由r2s</code> 只有一个 <code>LAN</code> 口，不能同时接多个 <code>设备ABCDE</code>。也就是说，<code>r2s</code> 不能识别到 <code>switch</code>，进而不能用 <code>访问控制</code> 来设置为 <code>TCP2</code> 了…</p><p>然后我又想到了<strong>交换机</strong>的 <code>中继AP</code> 模式，正好完美解决当前的问题了…..</p><p>其实就是把之前 <code>主路由</code> 模式下的 <code>硬路由</code>，从 <code>路由器</code> 改为 <code>交换机</code> 的功能，这样 <code>硬路由</code> 就相当于一个 <code>hub</code> 类似的功能，不提供实际 <code>IP</code> 和 <code>MAC</code>，只提供<strong>分流</strong>功能，把 <code>软路由</code> <code>LAN</code> 出来的流量直接给对应的 <code>设备ABCDE</code>，而且这种情况下，<code>软路由</code> 可以直接获取到 <code>设备ABCDE</code> 的 <code>IP</code> 和 <code>MAC</code>，进而就能通过 <code>访问控制</code> 设置 <code>switch</code> 的 <code>TCP</code> 了</p><p><strong>新的家庭网络连接方式</strong></p><p><img src="http://image.jianwill.cn/uPic/8txA7M_20210120171154.png" alt="8txA7M_20210120171154" style="zoom:40%"></p><p><strong>passwall相关配置</strong></p><p><img src="http://image.jianwill.cn/uPic/1_20210120180506.jpeg" alt="1_20210120180506" style="zoom:30%"></p><p><img src="http://image.jianwill.cn/uPic/2_20210120180713.jpeg" alt="2_20210120180713" style="zoom:33%"></p><p><img src="http://image.jianwill.cn/uPic/3_20210120180712.jpeg" alt="3_20210120180712" style="zoom:37%"></p><p><img src="http://image.jianwill.cn/uPic/4_20210120180713.jpeg" alt="4_20210120180713"></p><p>这样配置后，上面的问题就完美解决啦～</p><h4 id="剩余问题"><a href="#剩余问题" class="headerlink" title="剩余问题"></a>剩余问题</h4><p>理论上讲，上面的方案配置正确的话，应该是可行的。</p><p>但实际发现，<code>访问控制</code> 这个功能并没有生效，网上查找资料后发现，貌似是新版本 <code>passwall</code> 有这个问题，就版本就没有….</p><p>然后吧…给作者提了个 <a href="https://github.com/xiaorouji/openwrt-passwall/issues/887" target="_blank" rel="noopener">issue</a> ，等待大佬的修复…..</p><h3 id="最终成果"><a href="#最终成果" class="headerlink" title="最终成果"></a>最终成果</h3><p>经过这次升级后，家里的网络更加智能啦～</p><p>可以根据规则指定 <code>某些设备</code> 走 <code>指定的协议</code>，而不会对主网络(默认 <code>v2ray</code> 的 <code>TCP</code> 协议)有影响。比如 <code>switch</code> ， 可以指定全程走 <code>ss</code> 协议，然后</p><p>就可以愉快的 <code>喷喷</code> 啦～ 😊</p><p><img src="http://image.jianwill.cn/uPic/splatoon_1_20210121095537.jpg" alt="splatoon_1_20210121095537"></p></div><div class="post-share">分享到：</div><footer class="post-footer"><div class="post-tags"><a href="/tags/v2ray/" rel="tag"><i class="fa fa-tag"></i> v2ray</a> <a href="/tags/vpn/" rel="tag"><i class="fa fa-tag"></i> vpn</a> <a href="/tags/科学上网/" rel="tag"><i class="fa fa-tag"></i> 科学上网</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2020/11/16/animation/" rel="next" title="动效小结"><i class="fa fa-chevron-left"></i> 动效小结</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article><div class="post-spread"></div></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/header/card-2.jpg" alt="Jianww"><p class="site-author-name" itemprop="name"></p><p class="site-description motion-element" itemprop="description">这个人很懒...</p></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/Jian2333" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up"><i class="fa fa-fw fa-github"></i></a> </span><span class="links-of-author-item"><a href="http://www.jianwill.cn" target="_blank" title="更多" data-balloon="更多" data-balloon-pos="up"><i class="fa fa-fw fa-more"></i></a></span></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">26</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">4</span> <span class="site-state-item-name">分类</span></a></div></nav><div class="cc-license motion-element" itemprop="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank"><img src="/images/cc-by-nc-sa.png" alt="Creative Commons"></a></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#升级之旅-一"><span class="nav-number">1.</span> <span class="nav-text">升级之旅(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#痛点"><span class="nav-number">1.1.</span> <span class="nav-text">痛点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#硬路由尝试"><span class="nav-number">1.2.1.</span> <span class="nav-text">硬路由尝试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#软路由"><span class="nav-number">1.2.2.</span> <span class="nav-text">软路由</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级之旅-二"><span class="nav-number">2.</span> <span class="nav-text">升级之旅(二)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新的痛点"><span class="nav-number">2.1.</span> <span class="nav-text">新的痛点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案"><span class="nav-number">2.2.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#剩余问题"><span class="nav-number">2.3.</span> <span class="nav-text">剩余问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终成果"><span class="nav-number">3.</span> <span class="nav-text">最终成果</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-image"></div><div class="footer-inner"><p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p><p>前端萌新，哈哈哈 ~</p><p>© <span itemprop="copyrightYear">2021</span> Hi,Jianww. 由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动. Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> v0.0.42. <a href="/sitemap.xml" target="_blank">站点地图</a>. xxxx.</p><p>Made with <i class="fa fa-heart throb" style="color:#d43f57"></i> by <span class="author" itemprop="copyrightHolder">Jianww</span>.</p></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div><canvas id="evanyou"></canvas><div id="aplayer-fixed"></div>11</div><script type="text/javascript" src="/js/sagiri.min.js?v=0.0.42"></script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$('.highlight').each(function (i, e) {
+  var $wrap = $('<div>').addClass('highlight-wrap')
+  $(e).after($wrap)
+  $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+    var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+      return $(e).text()
+    }).toArray().join('\n')
+    var ta = document.createElement('textarea')
+    document.body.appendChild(ta)
+    ta.style.position = 'absolute'
+    ta.style.top = '0px'
+    ta.style.left = '0px'
+    ta.value = code
+    ta.select()
+    ta.focus()
+    var result = document.execCommand('copy')
+    document.body.removeChild(ta)
+    
+    setTimeout(() => {
+      if(result)$(this).text('复制成功')
+      else $(this).text('复制失败')
+    }, 300)
+    
+    $(this).blur()
+  })).on('mouseleave', function (e) {
+    var $b = $(this).find('.copy-btn')
+    setTimeout(function () {
+      $b.text('复制')
+    }, 300)
+  }).append(e)
+})</script><script>var serviceWorkerUri="/sw.js";"serviceWorker"in navigator?navigator.serviceWorker.register(serviceWorkerUri).then(function(){navigator.serviceWorker.controller?console.log("Assets cached by the controlling service worker."):console.log("Please reload this page to allow the service worker to handle network operations.")}).catch(function(e){console.log("ERROR: "+e)}):console.log("Service workers are not supported in the current browser.")</script></body></html>
