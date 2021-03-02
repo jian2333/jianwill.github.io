@@ -229,6 +229,29 @@ tags:
   });
   ```
 
+**allSettled**
+
+- `ES2020` 提出的新方法。
+
+- 和 `Promise.all` 、`Promise.race` 类似，区别是无论每个 `promise` 是 `resolve` 还是 `reject`，只有当 **所有** `promise` **都执行完成** 后，才会调用 `then` 函数。
+
+- `then` 函数的参数为一个数组，该数组包含原 `promises` 集中每个 `promise` 的结果。
+
+-  对于每个结果对象，都有一个 `status` 字符串。如果它的值为 `fulfilled`，则结果对象上存在一个 `value` 。如果值为 `rejected`，则存在一个 `reason` 。`value`（或 `reason` ）反映了每个 `promise` 决议（或拒绝）的值。
+
+  ```js
+  const promise1 = Promise.resolve(3);
+  const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
+  const promises = [promise1, promise2];
+  
+  Promise.allSettled(promises).
+    then((results) => results.forEach((result) => console.log(result.status)));
+  
+  // expected output:
+  // "fulfilled"
+  // "rejected"
+  ```
+
 ### Advanced
 
 **catch 和 reject 是一样的**
