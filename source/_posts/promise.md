@@ -159,11 +159,15 @@ tags:
 
 **all**
 
-- `Promise.all` ：传入一个 `promise` 对象的数组作为参数，只有当数组里的 **所有**  `promise` 对象 **全部** 变为 `resolve` 或 `reject` 时，才会调用 `then` 里相应的回调函数方法；
+- `Promise.all` ：传入一个 `promise` 对象的数组作为参数。
+
+- 只有当数组里的 **所有**  `promise` 对象 **全部** 变为 `resolve`  时，才会调用 `then` 里相应的回调函数方法，`then` 参数为 **所有**  `promise` 返回值组成的 **数组**。
+
+- 只要有一个 `promise` 对象变为 `reject` ，就会调用 `catch` 里的回调函数方法，`catch` 参数为 `reject` 的 `promise` 返回值。
 
 - 数组中的多个 `promise` 一起 **同时开始，并行执行** 。
 
-- 所以顺序是：`arr[0],arr[1+...] --> then` 。
+- 所以顺序是：`(arr[0] | arr[1] | arr[2+...]) --> then` 或者 `arr[0] | arr[1] --> catch | arr[2+...]` 。
 
   ```js
   var promise1 = new Promise(function(resolve, reject){
@@ -192,11 +196,13 @@ tags:
 
 **race**
 
-- `Promise.race` ：和 `Promise.all` 类似，区别是 **只要有一个** `promise` 对象变为 `resolve` 或 `reject` 时，就会调用 `then` 方法；
+- `Promise.race` ：和 `Promise.all` 类似，区别是 **只要有一个** `promise` 对象变为 `resolve` 或 `reject` 时，就会调用 `then` 或 `catch` 方法；
 
-- `then` 方法执行完后，数组中后续的 `promise` 还会继续执行。
+- 数组中的多个 `promise` 一起 **同时开始，并行执行** （所以第一个执行完的不一定是 `arr[0]`）。
 
-- 所以顺序是：`arr[0] --> then --> arr[1+...]` 。
+- `then/catch` 方法的参数为第一个执行完的 `promise` 返回的值。
+
+- 所以顺序是：`arr[x] --> then/catch | arr[0] | arr[1] | arr[2+...]` 。
 
   ```js
   var promise1 = new Promise(function(resolve, reject){
