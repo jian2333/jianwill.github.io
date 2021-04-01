@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jian2333.github.io/2019/08/18/omp/</loc>
+    
+    <lastmod>2021-04-01T03:08:48.225Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jian2333.github.io/2019/06/14/promise/</loc>
     
-    <lastmod>2021-03-02T08:53:10.529Z</lastmod>
+    <lastmod>2021-03-02T09:04:43.609Z</lastmod>
     
   </url>
   
@@ -82,13 +89,6 @@
     <loc>http://jian2333.github.io/2019/08/25/nginx-1/</loc>
     
     <lastmod>2019-09-01T15:17:03.669Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jian2333.github.io/2019/08/18/omp/</loc>
-    
-    <lastmod>2019-08-18T11:24:13.763Z</lastmod>
     
   </url>
   
