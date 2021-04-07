@@ -1,0 +1,344 @@
+<!DOCTYPE html><html class="theme-next pisces" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="//fonts.loli.net/css?family=Sigmar One:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css"><link href="/css/main.css?v=0.0.42" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/header/avatar-2.jpg?v=0.0.42"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=0.0.42"><link rel="mask-icon" href="/images/header/avatar-2.jpg?v=0.0.42" color="#222"><meta name="keywords" content="web前端,脚手架,nodej,"><meta name="description" content="一般，我们知道为什么需要脚手架？减少重复性的工作，不再需要复制其他项目再删除无关代码，或者从零创建一个项目和文件。根据交互动态生成项目结构和配置文件，具备更高的灵活性和人性化定制的能力。多人协作更为方便，避免了人工传递文件的繁琐。集成互联网上的模板，方便自己与他人使用。"><meta name="keywords" content="web前端,脚手架,nodej"><meta property="og:type" content="article"><meta property="og:title" content="中后台系统之mbs-cli脚手架集成"><meta property="og:url" content="http://jian2333.github.io/2021/01/06/my-cli/index.html"><meta property="og:site_name" content="Hi,Jianww"><meta property="og:description" content="一般，我们知道为什么需要脚手架？减少重复性的工作，不再需要复制其他项目再删除无关代码，或者从零创建一个项目和文件。根据交互动态生成项目结构和配置文件，具备更高的灵活性和人性化定制的能力。多人协作更为方便，避免了人工传递文件的繁琐。集成互联网上的模板，方便自己与他人使用。"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://jian2333.github.io/images/mc-1.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-2.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-3.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-4.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-5.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-6.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-7.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-8.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-9.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-10.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-11.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-12.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-13.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-14.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-15.jpg"><meta property="og:image" content="http://jian2333.github.io/images/mc-16.jpg"><meta property="og:updated_time" content="2021-04-07T08:35:40.125Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="中后台系统之mbs-cli脚手架集成"><meta name="twitter:description" content="一般，我们知道为什么需要脚手架？减少重复性的工作，不再需要复制其他项目再删除无关代码，或者从零创建一个项目和文件。根据交互动态生成项目结构和配置文件，具备更高的灵活性和人性化定制的能力。多人协作更为方便，避免了人工传递文件的繁琐。集成互联网上的模板，方便自己与他人使用。"><meta name="twitter:image" content="http://jian2333.github.io/images/mc-1.jpg"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"0.0.42",sidebar:{position:"right",display:"always",offset:52,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,tabs:!0,motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},since:"7/7/2017 11:30:00",onlineAPI:"",site:{title:"Hi,Jianww",subtitle:"",author:"Jianww"},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},leancloud:{enable:!0,appID:"qo8CRfEEmihHu03bD3HWUTFa-gzGzoHsz",appKey:"WTiuQmcTAY1pN7pr7nMuIIkK"},favicon:{visibilitychange:!0,narmal:"/images/favicon.ico",hidden:"/images/failure.ico",show_text:"(/≧▽≦/)咦！又好了！",hide_text:"(●—●)喔哟，崩溃啦！"}}</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script><title>中后台系统之mbs-cli脚手架集成 | Hi,Jianww</title><script>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-140893760-1","auto"),ga("send","pageview")</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling"><div class="container sidebar-position-right page-post-detail"><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-rocket"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li><li class="menu-item search"><form class="search-form"><input name="keyword" type="text" class="search-input" placeholder="站内搜索"> <button type="submit" class="search-submit"><i class="fa fa-search"></i></button></form></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav><div class="site-brand-wrapper" style="background-image:url(/images/header/bg-1.jpg)"><div class="site-meta"><div class="custom-logo-site-title"><div class="brand"><span class="logo-line-before"><i></i></span><div class="site-title"><div id="animate" class="animate"><span>H</span><span>i</span><span>,</span><span>J</span><span>i</span><span>a</span><span>n</span><span>w</span><span>w</span></div><div id="guide" class="guide"><span>H</span><span>i</span><span>,</span><span>J</span><span>i</span><span>a</span><span>n</span><span>w</span><span>w</span></div></div><span class="logo-line-after"><i></i></span></div></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-master-avatar" itemprop="image" src="/images/header/avatar-2.jpg" alt="Jianww"><h2 class="site-master-description" itemprop="description"><span>Coding一时爽，</span><span>一直Coding一直爽！</span></h2></div></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-date"><div class="post-month">01月</div><div class="post-day">06</div></div><div class="post-badge"><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span></div><div class="post-block"><link itemprop="mainEntityOfPage" href="http://jian2333.github.io/2021/01/06/my-cli/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Jianww"><meta itemprop="description" content><meta itemprop="image" content="/images/header/avatar-2.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Hi,Jianww"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">中后台系统之mbs-cli脚手架集成</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-06T22:52:14+08:00">2021-01-06</time> </span><span class="post-wordcount"><span class="post-meta-divider">•</span> <span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i> </span><span class="post-meta-item-text">字数统计</span> <span title="字数统计">1907</span> </span><span id="/2021/01/06/my-cli/" class="leancloud_visitors" data-flag-title="中后台系统之mbs-cli脚手架集成"><span class="post-meta-divider">•</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">阅读次数</span> <span class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><h3 id="一般，我们知道"><a href="#一般，我们知道" class="headerlink" title="一般，我们知道"></a>一般，我们知道</h3><p><img src="/images/mc-1.jpg" alt></p><h3 id="为什么需要脚手架？"><a href="#为什么需要脚手架？" class="headerlink" title="为什么需要脚手架？"></a>为什么需要脚手架？</h3><ol><li>减少重复性的工作，不再需要复制其他项目再删除无关代码，或者从零创建一个项目和文件。</li><li>根据交互动态生成项目结构和配置文件，具备更高的灵活性和人性化定制的能力。</li><li>多人协作更为方便，避免了人工传递文件的繁琐。</li><li>集成互联网上的模板，方便自己与他人使用。</li></ol><a id="more"></a><h4 id="脚手架工作流"><a href="#脚手架工作流" class="headerlink" title="脚手架工作流"></a>脚手架工作流</h4><p><img src="/images/mc-2.jpg" alt></p><h4 id="脚手架问答流"><a href="#脚手架问答流" class="headerlink" title="脚手架问答流"></a>脚手架问答流</h4><p><img src="/images/mc-3.jpg" alt></p><h3 id="如何搭建一个脚手架"><a href="#如何搭建一个脚手架" class="headerlink" title="如何搭建一个脚手架"></a>如何搭建一个脚手架</h3><p><img src="/images/mc-4.jpg" alt></p><h4 id="第三方库的支持"><a href="#第三方库的支持" class="headerlink" title="第三方库的支持"></a>第三方库的支持</h4><p><img src="/images/mc-5.jpg" alt></p><h4 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h4><h5 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h5><p>首先创建一个空项目，命名为 <strong>mbs-cli</strong> ，然后新建一个 <strong>bin/mbs</strong> 文件，再执行 <code>npm init</code> 生成一个 <code>package.json</code> 文件。最后安装上面需要用到的依赖。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir mbs-cli &amp;&amp; <span class="built_in">cd</span> mbs-cli</span><br><span class="line">mkdir bin &amp;&amp; <span class="built_in">cd</span> bin &amp;&amp; touch mbs &amp;&amp; <span class="built_in">cd</span> ../ &amp;&amp; npm init</span><br><span class="line">npm install commander download-git-repo inquirer handlebars ora chalk <span class="built_in">log</span>-symbols cli-table -S</span><br></pre></td></tr></table></figure><h5 id="2、处理命令行"><a href="#2、处理命令行" class="headerlink" title="2、处理命令行"></a>2、处理命令行</h5><p><strong>node.js</strong> 内置了对命令行操作的支持，在 <code>package.json</code> 中的 <code>bin</code> 字段可以定义命令名和关联的执行文件。</p><p>在 <code>package.json</code> 中加上 <code>bin</code> 的内容：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"mbs-cli"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"中后台系统脚手架"</span>,</span><br><span class="line">  <span class="attr">"bin"</span>: &#123;</span><br><span class="line">    <span class="attr">"mbs"</span>: <span class="string">"bin/mbs"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>首先在 <code>mbs</code> 文件中引入相关依赖模块：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; existsSync &#125; = <span class="built_in">require</span>(<span class="string">'fs'</span>) <span class="comment">// 系统内置模块 主要用来操作文件</span></span><br><span class="line"><span class="keyword">const</span> program = <span class="built_in">require</span>(<span class="string">'commander'</span>) <span class="comment">// 自动的解析命令和参数，用于处理用户输入的命令</span></span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>) <span class="comment">// 给终端的字体加上颜色</span></span><br><span class="line"><span class="keyword">const</span> symbols = <span class="built_in">require</span>(<span class="string">'log-symbols'</span>) <span class="comment">// 在终端上显示出 ✔︎ 或者 ✘ 等的图标</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> res = <span class="function"><span class="params">command</span> =&gt;</span> resolve(__dirname, <span class="string">'../commands/'</span>, command)</span><br></pre></td></tr></table></figure><p>然后编写nodejs处理逻辑，具体用法见下。</p><h4 id="nodejs依赖模块介绍与用法"><a href="#nodejs依赖模块介绍与用法" class="headerlink" title="nodejs依赖模块介绍与用法"></a>nodejs依赖模块介绍与用法</h4><h5 id="commander（指挥官）"><a href="#commander（指挥官）" class="headerlink" title="commander（指挥官）"></a>commander（指挥官）</h5><p>自动地解析命令和参数，用于处理用户输入的命令</p><ul><li>usage(): 设置usage值，自定义帮助信息</li><li>command(): 定义一个命令名字</li><li>description(): 设置 description值</li><li>option(): 定义参数，需要设置「关键字」和 「描述」，关键字包括「简写」和「全写」两部分，以 <code>,</code>、<code>|</code>、<code>空格</code> 做分隔</li><li>parse(): 解析命令行参数 <code>argv</code></li><li>version(): 终端输出版本号</li></ul><p><strong>定义常规命令：</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义常规命令</span></span><br><span class="line">program.usage(<span class="string">'&lt;command&gt;'</span>)</span><br><span class="line">program.version(<span class="built_in">require</span>(<span class="string">'../package'</span>).version)</span><br></pre></td></tr></table></figure><p><strong>init命令逻辑</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// init 命令逻辑</span></span><br><span class="line">program</span><br><span class="line">  .command(<span class="string">'init &lt;name&gt;'</span>)</span><br><span class="line">  .description(<span class="string">'Generate a new project'</span>)</span><br><span class="line">  .alias(<span class="string">'i'</span>)</span><br><span class="line">  .action(<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!existsSync(name)) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(name)</span><br><span class="line">      <span class="built_in">require</span>(res(<span class="string">'init'</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 错误提示项目已存在，避免覆盖原有项目</span></span><br><span class="line">      <span class="built_in">console</span>.log(symbols.error, chalk.red(<span class="string">'Project already exists'</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure><p><strong>处理用户输入命令</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// init 命令逻辑</span></span><br><span class="line">program</span><br><span class="line">  .command(<span class="string">'init &lt;name&gt;'</span>)</span><br><span class="line">  .description(<span class="string">'Generate a new project'</span>)</span><br><span class="line">  .alias(<span class="string">'i'</span>)</span><br><span class="line">  .action(<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!existsSync(name)) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(name)</span><br><span class="line">      <span class="built_in">require</span>(res(<span class="string">'init'</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 错误提示项目已存在，避免覆盖原有项目</span></span><br><span class="line">      <span class="built_in">console</span>.log(symbols.error, chalk.red(<span class="string">'Project already exists'</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure><p><strong>最后处理解析命令行参数</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">program.parse(process.argv)</span><br><span class="line"><span class="comment">// program.parse: 解析命令之中的参数，根据上面定义好的规则执行命令</span></span><br><span class="line"><span class="comment">// process: 一个全局对象，控制有关信息，控制node.js的进程</span></span><br><span class="line"><span class="comment">// process.argv: 该属性返回一个数组，这个数组包含了启动node.js进程时的命令行参数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!program.args.length) &#123;</span><br><span class="line">  program.help()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="inquirer（询问者）"><a href="#inquirer（询问者）" class="headerlink" title="inquirer（询问者）"></a>inquirer（询问者）</h5><p>通用的命令行用户界面集合，用于和用户进行交互。由于交互的问题种类不同，<code>inquirer</code> 为每个问题提供很多参数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type: 表示提问的类型，包括：input, confirm, list, rawlist, expand, checkbox, password, editor;</span><br><span class="line">name: 存储当前问题回答的变量;</span><br><span class="line">message: 问题的描述；</span><br><span class="line">default: 默认值;</span><br><span class="line">choices: 列表选项，在某些type下可用，并且包含一个分隔符(separator)；</span><br><span class="line">validate: 对用户的回答进行校验‘</span><br><span class="line">filter: 对用户的回答进行过滤处理，返回处理后的值;</span><br><span class="line">when: 根据前面问题的回答，判断当前问题是否需要被回答；</span><br><span class="line">prefix: 修改message默认前缀；</span><br><span class="line">suffix: 修改message默认后缀；</span><br></pre></td></tr></table></figure><p><strong>语法结构</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">'inquirer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promptList = [</span><br><span class="line">  <span class="comment">// 具体交互内容</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">inquirer.prompt(promptList).then(<span class="function"><span class="params">answers</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(answers) <span class="comment">// 返回的结果</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p><strong>input类型</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promptList1 = [</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    name: <span class="string">'author'</span>,</span><br><span class="line">    message: <span class="string">'请输入作者名称'</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p><strong>效果</strong></p><p><img src="/images/mc-6.jpg" alt></p><p><strong>confirm类型</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promptList2 = [</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'confirm'</span>,</span><br><span class="line">    name: <span class="string">'watch'</span>,</span><br><span class="line">    message: <span class="string">'是否使用监听？'</span>,</span><br><span class="line">    prefix: <span class="string">'前缀'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'confirm'</span>,</span><br><span class="line">    name: <span class="string">'filter'</span>,</span><br><span class="line">    message: <span class="string">'是否使用过滤？'</span>,</span><br><span class="line">    when: <span class="function"><span class="keyword">function</span> (<span class="params">answers</span>) </span>&#123; <span class="comment">// 当watch为ture时才会提示当前问题</span></span><br><span class="line">      <span class="keyword">return</span> answers.watch</span><br><span class="line">    &#125;,</span><br><span class="line">    suffix: <span class="string">'后缀'</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p><strong>效果</strong></p><p><img src="/images/mc-7.jpg" alt></p><p><strong>list类型</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promptList3 = [</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'list'</span>,</span><br><span class="line">    message: <span class="string">'请选择一种水果：'</span>,</span><br><span class="line">    name: <span class="string">'fruit'</span>,</span><br><span class="line">    choices: [</span><br><span class="line">      <span class="string">'Apple'</span>,</span><br><span class="line">      <span class="string">'Pear'</span>,</span><br><span class="line">      <span class="string">'Banana'</span></span><br><span class="line">    ],</span><br><span class="line">    filter: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123; <span class="comment">// 使用 filter 将回答变为小写</span></span><br><span class="line">      <span class="keyword">return</span> val.toLowerCase()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p><strong>效果</strong></p><p><img src="/images/mc-8.jpg" alt></p><h5 id="download-git-repo"><a href="#download-git-repo" class="headerlink" title="download-git-repo"></a>download-git-repo</h5><p><code>download-git-repo</code> 支持从 <code>Github</code> 、<code>Gitlab</code>、<code>Bitbucket</code> 下载仓库</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">download(repository, destination, options, callback)</span><br></pre></td></tr></table></figure><p><strong>repository</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- GitHub - github:owner/name or simply owner/name</span><br><span class="line">- GitLab - gitlab:owner/name</span><br><span class="line">- Bitbucket - bithucket:owner/name</span><br><span class="line">- Direct - direct:url:branch</span><br></pre></td></tr></table></figure><p><strong>destination</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The file path to download the repository to. xxxxxxxxx</span><br></pre></td></tr></table></figure><p><strong>options</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">boolean default false - if true use git clone instead of an http download. </span><br><span class="line">while this can be a bit slower, it does allow private repositories to be used </span><br><span class="line">if the appropriate SSH keys are setup.</span><br></pre></td></tr></table></figure><p><strong>callback</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The callback function as function (err).</span><br></pre></td></tr></table></figure><h5 id="ora（loading动效）"><a href="#ora（loading动效）" class="headerlink" title="ora（loading动效）"></a>ora（loading动效）</h5><p>用于显示下载中的动画效果</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">'ora'</span>)</span><br><span class="line"><span class="keyword">const</span> spinner = ora(<span class="string">'正在下载模板...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始下载</span></span><br><span class="line">spinner.start()</span><br><span class="line"><span class="comment">// 下载成功</span></span><br><span class="line">spinner.succeed(<span class="string">'模板下载成功！'</span>)</span><br><span class="line"><span class="comment">// 下载失败</span></span><br><span class="line">spinner.faild(<span class="string">'模板下载失败！'</span>)</span><br></pre></td></tr></table></figure><p><img src="/images/mc-9.jpg" alt></p><h5 id="chalk（字体颜色）"><a href="#chalk（字体颜色）" class="headerlink" title="chalk（字体颜色）"></a>chalk（字体颜色）</h5><p>通过 <code>chalk</code> 来为打印信息加上样式，比如成功信息为绿色，失败信息为红色。这样子会让用户更加容易辨认，同时也让终端的显示更加好看：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(chalk.green(<span class="string">'项目创建成功'</span>))</span><br><span class="line"><span class="built_in">console</span>.log(chalk.red(<span class="string">'项目创建失败'</span>))</span><br></pre></td></tr></table></figure><h5 id="log-symbols（日志符号）"><a href="#log-symbols（日志符号）" class="headerlink" title="log-symbols（日志符号）"></a>log-symbols（日志符号）</h5><p>使用 <code>log-symbols</code> 在信息前面加上 ✔︎ 或者 ✘ 等的图标，优化视觉体验：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(symbols.success, chalk.green(<span class="string">'New project has been initialize successfully!'</span>))</span><br></pre></td></tr></table></figure><p><img src="/images/mc-10.jpg" alt></p><h5 id="handlebars"><a href="#handlebars" class="headerlink" title="handlebars"></a>handlebars</h5><p><code>handlebars</code> 可以对仓库的模板中的 <code>package.json</code> 文件做一些动态修改：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"&#123;&#123;name&#125;&#125;"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"&#123;&#123;description&#125;&#125;"</span>,</span><br><span class="line">  <span class="attr">"bin"</span>: &#123;</span><br><span class="line">    <span class="attr">"mbs"</span>: <span class="string">"bin/mbs"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">"&#123;&#123;author&#125;&#125;"</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>并在下载模板完成之后将用户输入的答案渲染到 <code>package.json</code> 中</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; readFileSync, writeFileSync &#125;  = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> handlebars = <span class="built_in">require</span>(<span class="string">'handlebars'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reWrite</span> (<span class="params">name, answers</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> filename = <span class="string">'./package.json'</span></span><br><span class="line">  <span class="keyword">const</span> meta = &#123;</span><br><span class="line">    name,</span><br><span class="line">    description: answers.description,</span><br><span class="line">    author: answers.author</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> content = readFileSync(filename).toString()</span><br><span class="line">  <span class="keyword">const</span> result = handlebars.compile(content)(meta)</span><br><span class="line">  writeFileSync(filename)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="cli-table"><a href="#cli-table" class="headerlink" title="cli-table"></a>cli-table</h5><p>表格</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Table = <span class="built_in">require</span>(<span class="string">'cli-table'</span>)</span><br><span class="line"><span class="keyword">const</span> template = <span class="built_in">require</span>(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/../templates.json`</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> table = <span class="keyword">new</span> Table(&#123;</span><br><span class="line">  head: [<span class="string">'Template Name'</span>, <span class="string">'Branch'</span>, <span class="string">'Url                                '</span>],</span><br><span class="line">  style: &#123;</span><br><span class="line">    head: [<span class="string">'green'</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加数据</span></span><br><span class="line">table.push([<span class="string">'template1'</span>, <span class="string">'branch1'</span>, <span class="string">'url1'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示数据</span></span><br><span class="line"><span class="built_in">console</span>.log(table.toString())</span><br></pre></td></tr></table></figure><p><img src="/images/mc-11.jpg" alt></p><h5 id="shelljs"><a href="#shelljs" class="headerlink" title="shelljs"></a>shelljs</h5><p>执行命令行命令 <code>cd path &amp;&amp; npm i</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shell = <span class="built_in">require</span>(<span class="string">'shelljs'</span>)</span><br><span class="line"></span><br><span class="line">shell.cd(meta.name)</span><br><span class="line">shell.exec(<span class="string">'npm i'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, stdout, stderr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    spinner.fail()</span><br><span class="line">    <span class="built_in">console</span>.log(symbols.error, chalk.red(err))</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    spinner.succeed()</span><br><span class="line">    <span class="built_in">console</span>.log(</span><br><span class="line">      symbols.success,</span><br><span class="line">      chalk.green(<span class="string">'The object has installed dependence successfully!'</span>)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="msb-cli脚手架"><a href="#msb-cli脚手架" class="headerlink" title="msb-cli脚手架"></a>msb-cli脚手架</h3><h4 id="mbs-cli工作流"><a href="#mbs-cli工作流" class="headerlink" title="mbs-cli工作流"></a>mbs-cli工作流</h4><p><img src="/images/mc-12.jpg" alt></p><h4 id="mbs-cli目录结构"><a href="#mbs-cli目录结构" class="headerlink" title="mbs-cli目录结构"></a>mbs-cli目录结构</h4><p><img src="/images/mc-13.jpg" alt></p><h4 id="mbs-cli核心命令"><a href="#mbs-cli核心命令" class="headerlink" title="mbs-cli核心命令"></a>mbs-cli核心命令</h4><p><img src="/images/mc-14.jpg" alt></p><h3 id="本地npm模块调试"><a href="#本地npm模块调试" class="headerlink" title="本地npm模块调试"></a>本地npm模块调试</h3><h4 id="开启调试模式"><a href="#开启调试模式" class="headerlink" title="开启调试模式"></a>开启调试模式</h4><p><code>npm link</code> 可以将当前目录 <code>./bin</code> 文件夹下的 <code>npm包</code> 链接到全局执行环境，从而在任意位置使用命令行都可以直接运行该 <code>npm包</code></p><p><img src="/images/mc-15.jpg" alt></p><h4 id="关闭调试模式"><a href="#关闭调试模式" class="headerlink" title="关闭调试模式"></a>关闭调试模式</h4><p>在当前目录下执行 <code>npm unlink</code> 即可删除链接符号</p><p><img src="/images/mc-16.jpg" alt></p></div><div class="post-share">分享到：</div><footer class="post-footer"><div class="post-tags"><a href="/tags/web前端/" rel="tag"><i class="fa fa-tag"></i> web前端</a> <a href="/tags/脚手架/" rel="tag"><i class="fa fa-tag"></i> 脚手架</a> <a href="/tags/nodej/" rel="tag"><i class="fa fa-tag"></i> nodej</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2020/11/16/animation/" rel="next" title="动效小结"><i class="fa fa-chevron-left"></i> 动效小结</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2021/01/19/home-net-2/" rel="prev" title="家庭网络的升级之旅(二)">家庭网络的升级之旅(二) <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/header/card-2.jpg" alt="Jianww"><p class="site-author-name" itemprop="name"></p><p class="site-description motion-element" itemprop="description">这个人很懒...</p></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/Jian2333" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up"><i class="fa fa-fw fa-github"></i></a> </span><span class="links-of-author-item"><a href="http://www.jianwill.cn" target="_blank" title="更多" data-balloon="更多" data-balloon-pos="up"><i class="fa fa-fw fa-more"></i></a></span></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">27</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">4</span> <span class="site-state-item-name">分类</span></a></div></nav><div class="cc-license motion-element" itemprop="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank"><img src="/images/cc-by-nc-sa.png" alt="Creative Commons"></a></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般，我们知道"><span class="nav-number">1.</span> <span class="nav-text">一般，我们知道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要脚手架？"><span class="nav-number">2.</span> <span class="nav-text">为什么需要脚手架？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#脚手架工作流"><span class="nav-number">2.1.</span> <span class="nav-text">脚手架工作流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚手架问答流"><span class="nav-number">2.2.</span> <span class="nav-text">脚手架问答流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何搭建一个脚手架"><span class="nav-number">3.</span> <span class="nav-text">如何搭建一个脚手架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方库的支持"><span class="nav-number">3.1.</span> <span class="nav-text">第三方库的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建步骤"><span class="nav-number">3.2.</span> <span class="nav-text">搭建步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、初始化项目"><span class="nav-number">3.2.1.</span> <span class="nav-text">1、初始化项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、处理命令行"><span class="nav-number">3.2.2.</span> <span class="nav-text">2、处理命令行</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodejs依赖模块介绍与用法"><span class="nav-number">3.3.</span> <span class="nav-text">nodejs依赖模块介绍与用法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#commander（指挥官）"><span class="nav-number">3.3.1.</span> <span class="nav-text">commander（指挥官）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#inquirer（询问者）"><span class="nav-number">3.3.2.</span> <span class="nav-text">inquirer（询问者）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#download-git-repo"><span class="nav-number">3.3.3.</span> <span class="nav-text">download-git-repo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ora（loading动效）"><span class="nav-number">3.3.4.</span> <span class="nav-text">ora（loading动效）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#chalk（字体颜色）"><span class="nav-number">3.3.5.</span> <span class="nav-text">chalk（字体颜色）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#log-symbols（日志符号）"><span class="nav-number">3.3.6.</span> <span class="nav-text">log-symbols（日志符号）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#handlebars"><span class="nav-number">3.3.7.</span> <span class="nav-text">handlebars</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cli-table"><span class="nav-number">3.3.8.</span> <span class="nav-text">cli-table</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shelljs"><span class="nav-number">3.3.9.</span> <span class="nav-text">shelljs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msb-cli脚手架"><span class="nav-number">4.</span> <span class="nav-text">msb-cli脚手架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mbs-cli工作流"><span class="nav-number">4.1.</span> <span class="nav-text">mbs-cli工作流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mbs-cli目录结构"><span class="nav-number">4.2.</span> <span class="nav-text">mbs-cli目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mbs-cli核心命令"><span class="nav-number">4.3.</span> <span class="nav-text">mbs-cli核心命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地npm模块调试"><span class="nav-number">5.</span> <span class="nav-text">本地npm模块调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启调试模式"><span class="nav-number">5.1.</span> <span class="nav-text">开启调试模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭调试模式"><span class="nav-number">5.2.</span> <span class="nav-text">关闭调试模式</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-image"></div><div class="footer-inner"><p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p><p>前端萌新，哈哈哈 ~</p><p>© <span itemprop="copyrightYear">2021</span> Hi,Jianww. 由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动. Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> v0.0.42. <a href="/sitemap.xml" target="_blank">站点地图</a>. xxxx.</p><p>Made with <i class="fa fa-heart throb" style="color:#d43f57"></i> by <span class="author" itemprop="copyrightHolder">Jianww</span>.</p></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div><canvas id="evanyou"></canvas><div id="aplayer-fixed"></div>11</div><script type="text/javascript" src="/js/sagiri.min.js?v=0.0.42"></script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$('.highlight').each(function (i, e) {
+  var $wrap = $('<div>').addClass('highlight-wrap')
+  $(e).after($wrap)
+  $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+    var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+      return $(e).text()
+    }).toArray().join('\n')
+    var ta = document.createElement('textarea')
+    document.body.appendChild(ta)
+    ta.style.position = 'absolute'
+    ta.style.top = '0px'
+    ta.style.left = '0px'
+    ta.value = code
+    ta.select()
+    ta.focus()
+    var result = document.execCommand('copy')
+    document.body.removeChild(ta)
+    
+    setTimeout(() => {
+      if(result)$(this).text('复制成功')
+      else $(this).text('复制失败')
+    }, 300)
+    
+    $(this).blur()
+  })).on('mouseleave', function (e) {
+    var $b = $(this).find('.copy-btn')
+    setTimeout(function () {
+      $b.text('复制')
+    }, 300)
+  }).append(e)
+})</script><script>var serviceWorkerUri="/sw.js";"serviceWorker"in navigator?navigator.serviceWorker.register(serviceWorkerUri).then(function(){navigator.serviceWorker.controller?console.log("Assets cached by the controlling service worker."):console.log("Please reload this page to allow the service worker to handle network operations.")}).catch(function(e){console.log("ERROR: "+e)}):console.log("Service workers are not supported in the current browser.")</script></body></html>
