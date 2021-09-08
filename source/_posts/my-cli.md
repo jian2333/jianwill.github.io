@@ -7,7 +7,7 @@ categories:
 tags:
 - 脚手架
 - web前端
-- nodej
+- nodejs
 ---
 
 ### 一般，我们知道
