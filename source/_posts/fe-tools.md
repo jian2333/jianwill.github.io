@@ -8,8 +8,6 @@ tags:
 - 前端
 - cli
 - nodejs
-typora-copy-images-to: ../images
-typora-root-url: ../images
 ---
 
 最近要在项目里引入 `git commit` 前执行 `eslint` 校验，通过才允许提交的功能。
