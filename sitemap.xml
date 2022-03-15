@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jian2333.github.io/2020/06/29/vue-router/</loc>
+    
+    <lastmod>2022-03-15T02:30:05.616Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jian2333.github.io/about/index.html</loc>
+    
+    <lastmod>2022-03-15T02:30:02.275Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jian2333.github.io/2021/09/08/fe-tools/</loc>
     
-    <lastmod>2021-09-08T07:58:18.866Z</lastmod>
+    <lastmod>2021-09-08T08:08:28.960Z</lastmod>
     
   </url>
   
@@ -75,13 +89,6 @@
     <loc>http://jian2333.github.io/2020/01/05/v2ray/</loc>
     
     <lastmod>2020-08-09T04:36:51.988Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jian2333.github.io/2020/06/29/vue-router/</loc>
-    
-    <lastmod>2020-06-29T07:24:24.541Z</lastmod>
     
   </url>
   
@@ -222,13 +229,6 @@
     <loc>http://jian2333.github.io/tags/index.html</loc>
     
     <lastmod>2019-05-15T07:56:42.491Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jian2333.github.io/about/index.html</loc>
-    
-    <lastmod>2019-05-15T07:37:40.050Z</lastmod>
     
   </url>
   
