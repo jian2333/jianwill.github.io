@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[homebrew安装低版本应用]]></title>
+    <url>%2F2024%2F07%2F05%2Fhomebrew%2F</url>
+    <content type="text"><![CDATA[Mac系统下，我们一般用 homebrew 安装应用，安装的应用默认是当前 homebrew 版本内置的该应用最高版本，那如何安装该应用的低版本呢。背景Mac 下使用 homebrew 安装应用，一般我们会关闭 homebrew 的自动更新以提高安装效率。当我们使用几年后，但电脑系统和 homebrew没更新后，我们会发现当前 homebrew 版本的应用都比较低。比如现在 2024-07-05, 我用的 homebrew 还是2020年的，执行 brew install nginx 后安装的 nginx 就是2020年左右的，大概是 1.19.0 左右。于是，我们更新 homebrew 为最新版本，并希望安装最新版本的 nginx，于是执行 homebrew update ，成功后执行 brew install nginx，然后，问题就出现了。安装 nginx 失败，提示：您当前的osx 系统版本(和xcode)版本过低，最新版的nginx(1.25.1)不支持当前版本，安装失败！。如果不想升级 osx 系统，那如何用高版本的 homebrew 安装任意版本的 应用 呢？方案在多次尝试后总结出来的经验：1、更新 homebrew 为最新版本1brew update2、查询想要安装的应用及版本。去 homebrew 官方目录下找到该应用，地址为 github-formula；点开具体的 xxx.rb 文件，点击右上角 History，通过 git 提交记录，找到想安装的版本，点击右侧第二个图标(View code at this point)；点击 Copy raw file，复制这版本的配置文件。3、修改当前 homebrew的 formula 文件为指定版本的配置文件12# brew edit &lt;packageName&gt;brew edit nginx粘贴剪切板内容，替换打开的文件，保存关闭。4、开启使用手动formula配置。(重要！！！网上所有的方案都缺少这一步，所以都不生效)默认情况下，使用 brew install &lt;package&gt;，会自动更新 formula/xxx.rb 配置文件，再执行安装。也就是 第3步 修改的配置文件并不会生效。需要做一些设置，让配置文件生效，这样执行 brew install &lt;package&gt;，就能使用修改的配置文件，即 可以安装任意版本的应用。方法一：只当前终端生效：1HOMEBREW_NO_INSTALL_FROM_API=1 &amp;&amp; brew install &lt;package&gt;方法二：设置到终端配置文件，在终端永久生效：12345# 新增相关配置到配置文件最后echo "export HOMEBREW_NO_INSTALL_FROM_API=1" &gt;&gt; ~/.zshrc# 重启终端source ~/.zshrc5、安装应用1brew install nginxPS：低版本 osx + 高版本 homebrew 下，安装的大部分软件都会失败，提示不支持当前 osx 系统，那哪个版本的 &lt;package&gt; 支持当前 osx 系统，得去 homebrew-core-formula git记录里上，或者一个个尝试。实操实操以上面安装 nginx 为🌰：1、更新 homebrew1brew update2、查询想要安装的应用及版本3、修改当前 homebrew的 formula 文件为指定版本的配置文件1brew edit nginx4、开启使用手动formula配置。5、安装应用1brew install nginx安装完之后可以使用 nginx -v 查看版本。常用命令安装 homebrew1/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"卸载 homebrew1/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"更新 homebrew1brew update安装应用1brew install &lt;package&gt;更新应用1brew upgrade &lt;package&gt;卸载应用1brew uninstall &lt;package&gt;查看 homebrew 版本12brew --versionbrew -v列出所有已安装的应用1brew list查询远程残酷的应用，已安装的会显示绿色的勾12brew search &lt;package&gt;brew search /&lt;package的正则表达式&gt;/查询某个应用信息（及版本号，来源 formula/xxx.rb）1brew info &lt;package&gt;修改某个应用的 formula 配置文件1brew edit &lt;package&gt;]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[自用的前端小工具]]></title>
     <url>%2F2021%2F09%2F08%2Ffe-tools%2F</url>
     <content type="text"><![CDATA[最近要在项目里引入 git commit 前执行 eslint 校验，通过才允许提交的功能。考虑到可能会在多个项目中使用，以后也可能会增加其他功能。然后吧，决定写个小工具，集合了一键安装相关依赖的功能，后续只要不断维护小工具就能扩展功能了。目前的成果是，写了个包发布在 npm 上，通过命令 npx zwt-fe 即可使用。效果如下：想法一开始考虑到用户体验，最开始是打算使用类似 一键安装v2ray脚本 那种方式的，用户只需在 终端 输入命令，即可直接使用最新版的小工具，类似这样：1bash &lt;(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log后来但是考虑到开发成本，一键安装脚本 要使用 shell 开发的，有一定的学习成本，而且有些功能(动效、替换内容等)实现比较麻烦，最后决定用 node 写了，发包到 npm 上，直接使用 npx xx 即可。eslint + husky提交代码 git commit 时自动调用 eslint 校验代码，通过才提交代码。输入 npm run lint:fix 调用 esilnt 自动修复相关错误。实现过程husky 可以捕获 git 的钩子，在 git commit 前的钩子 pre-commit 上添加 npm run lint 即可以实现。eslint配置安装依赖：npm install -D eslint@7.32.0 eslint-plugin-vue@7.16.0 eslint-loader@4.0.2 babel-eslint@10.1.0 。创建 .eslintrc.js 并写入：less xxx &gt; .eslintrc.js 。创建 .eslintignore 并写入：less xx &gt; .eslintignore 。package.json 的 script 中写入：npm run lint：npm set-script lint &quot;./node_modules/.bin/eslint --ext .js,.vue ./&quot; 。npm run lint:fix：npm set-script lint &quot;./node_modules/.bin/eslint --fix --ext .js,.vue ./&quot; 。npm set-script 需要 npm7 | node15 以上，版本不符合需自己写方法替换 。husky配置官方文档：https://typicode.github.io/husky/#/?id=features 。安装 husky7：npx husky-init &amp;&amp; npm install。【可选】新增其他钩子：npx husky add .husky/pre-commit &quot;npm test&quot;。修改命令 echo &quot;npm run lint&quot; &gt;&gt; ./husky/pre-commit 。【可选】添加 path环境变量(sourceTree用)：echo &quot;export PATH=\&quot;$(dirname $(which node)):\$PATH\&quot;&quot; &gt; ~/.huskyrc 。其他: node路径__dirname：node 命令所在文件的路径 。./xx：执行 node 命令时的路径 。特例：在 require(&#39;./xx&#39;)时，和 __dirname 一样，是所在文件的路径 。commitlint + git cz + changelog提交代码 git commit 时自动校验 commit message 的格式，符合Angular规范的才提交成功 。使用 git cz 或 git-cz 代替 git commit，用工作流的方式添加符合规范的 commit message 。根据 git log 自动生成 CHANGELOG.md，需要注意：npm run changelog: 在 CHANGELOG.md 内生成自上次 npm run changelog 后至 package.json.version 更新之间的 git 提交记录。只添加在最后，不覆盖文件。PS：所以，使用 npm run changelog 更新记录前，需手动修改 package.json 中的 version，或使用 npm version major|minor|patch 自动更新 package.json 中的 version。npm run changelog:all：在 CHANGELOG.md 内生成从项目创建开始到现在的 git 提交记录，会覆盖文件。实现过程commitlint配置安装依赖：npm install -D @commitlint/cli@13.1.0 @commitlint/config-conventional@13.1.0 。创建 commitlint.config.js 并写入：less xxx &gt; commitlint.config.js。【可选】安装 husky：已安装可忽略 npx husky-init &amp;&amp; npm install。添加钩子：npx husky add .husky/commit-msg &#39;npx --no-install commitlint --edit $1&#39;。【可选】测试效果：echo &quot;foo&quot; | ./node_modules/.bin/commitlint 。git-cz配置官方文档：https://github.com/streamich/git-cz 。官方文档：https://github.com/commitizen/cz-cli/blob/master/README.md 。commitizen 默认使用 cz-conventional-changelog，只能显示英文，如要显示中文需使用 git-cz 并修改配置文件 changelog.config.js 。安装 commitizen 和 git-cz：npm install -g commitizen git-cz。初始化 git-cz：commitizen init git-cz -D -E --force。创建 changlog.config.js 并写入：less xxx &gt; changelog.config.js。changelog配置安装依赖：npm install -D conventional-changelog-cli 。写入脚本到 package.json：changelog：npm set-script changelog &quot;conventional-changelog -p angular -i CHANGELOG.md -s&quot;。changelog:all：npm set-script changelog:all &quot;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&quot;。]]></content>
@@ -22,9 +33,9 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>面试</tag>
-        <tag>js</tag>
         <tag>vue</tag>
+        <tag>js</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -159,8 +170,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>web前端</tag>
         <tag>后端</tag>
+        <tag>web前端</tag>
         <tag>正则表达式</tag>
       </tags>
   </entry>
@@ -185,8 +196,8 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>vue</tag>
         <tag>git</tag>
+        <tag>vue</tag>
         <tag>iview</tag>
         <tag>webpack</tag>
         <tag>echarts</tag>
@@ -238,8 +249,8 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>js</tag>
         <tag>webpack</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -334,8 +345,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>web前端</tag>
         <tag>hexo</tag>
+        <tag>web前端</tag>
       </tags>
   </entry>
   <entry>
